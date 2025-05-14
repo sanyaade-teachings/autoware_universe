@@ -301,11 +301,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/pr-10108/localization/autoware_gyro_odometer/</loc>
-         <lastmod>2025-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/pr-10108/localization/autoware_landmark_based_localizer/</loc>
          <lastmod>2025-05-14</lastmod>
          <changefreq>daily</changefreq>
@@ -392,11 +387,6 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/pr-10108/localization/yabloc/yabloc_pose_initializer/</loc>
-         <lastmod>2025-05-14</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/pr-10108/map/autoware_lanelet2_map_visualizer/</loc>
          <lastmod>2025-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -1251,6 +1241,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/pr-10108/system/autoware_default_adapi/document/diagnostics/</loc>
+         <lastmod>2025-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/pr-10108/system/autoware_default_adapi/document/fail-safe/</loc>
          <lastmod>2025-05-14</lastmod>
          <changefreq>daily</changefreq>
@@ -1272,6 +1267,11 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/pr-10108/system/autoware_default_adapi/document/operation-mode/</loc>
+         <lastmod>2025-05-14</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/pr-10108/system/autoware_default_adapi/document/parameters/</loc>
          <lastmod>2025-05-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
