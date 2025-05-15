@@ -6790,19 +6790,6 @@
     Parameters
   </a>
   
-    <nav class="md-nav" aria-label="Parameters">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-parameters" class="md-nav__link">
-    Core Parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -14353,19 +14340,6 @@
     Parameters
   </a>
   
-    <nav class="md-nav" aria-label="Parameters">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-parameters" class="md-nav__link">
-    Core Parameters
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -14462,100 +14436,114 @@
 </tbody>
 </table>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
-<h3 id="core-parameters">Core Parameters<a class="headerlink" href="#core-parameters" title="Permanent link">#</a></h3>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Type</th>
-<th>Default Value</th>
 <th>Description</th>
+<th>Default</th>
+<th>Range</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>filter_target_label.UNKNOWN</code></td>
-<td>bool</td>
-<td>false</td>
-<td>If true, unknown objects are filtered.</td>
-</tr>
-<tr>
-<td><code>filter_target_label.CAR</code></td>
-<td>bool</td>
-<td>false</td>
-<td>If true, car objects are filtered.</td>
-</tr>
-<tr>
-<td><code>filter_target_label.TRUCK</code></td>
-<td>bool</td>
-<td>false</td>
-<td>If true, truck objects are filtered.</td>
-</tr>
-<tr>
-<td><code>filter_target_label.BUS</code></td>
-<td>bool</td>
-<td>false</td>
-<td>If true, bus objects are filtered.</td>
-</tr>
-<tr>
-<td><code>filter_target_label.TRAILER</code></td>
-<td>bool</td>
-<td>false</td>
-<td>If true, trailer objects are filtered.</td>
-</tr>
-<tr>
-<td><code>filter_target_label.MOTORCYCLE</code></td>
-<td>bool</td>
-<td>false</td>
-<td>If true, motorcycle objects are filtered.</td>
-</tr>
-<tr>
-<td><code>filter_target_label.BICYCLE</code></td>
-<td>bool</td>
-<td>false</td>
-<td>If true, bicycle objects are filtered.</td>
-</tr>
-<tr>
-<td><code>filter_target_label.PEDESTRIAN</code></td>
-<td>bool</td>
-<td>false</td>
-<td>If true, pedestrian objects are filtered.</td>
-</tr>
-<tr>
-<td><code>max_x</code></td>
+<td>intensity_threshold</td>
 <td>float</td>
-<td>60.00</td>
-<td>Maximum of x of the filter effective range</td>
-</tr>
-<tr>
-<td><code>min_x</code></td>
-<td>float</td>
-<td>-20.00</td>
-<td>Minimum of x of the filter effective range</td>
-</tr>
-<tr>
-<td><code>max_y</code></td>
-<td>float</td>
-<td>20.00</td>
-<td>Maximum of y of the filter effective range</td>
-</tr>
-<tr>
-<td><code>min_y</code></td>
-<td>float</td>
-<td>-20.00</td>
-<td>Minium of y of the filter effective range</td>
-</tr>
-<tr>
-<td><code>intensity_threshold</code></td>
-<td>float</td>
+<td>The threshold of average intensity for filter.</td>
 <td>1.0</td>
-<td>The threshold of average intensity for filter</td>
+<td>N/A</td>
 </tr>
 <tr>
-<td><code>existence_probability_threshold</code></td>
+<td>existence_probability_threshold</td>
 <td>float</td>
+<td>The existence probability threshold to apply the filter.</td>
 <td>0.2</td>
-<td>The existence probability threshold to apply the filter</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_x</td>
+<td>float</td>
+<td>Maximum of x of the filter effective range.</td>
+<td>60.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_x</td>
+<td>float</td>
+<td>Minimum of x of the filter effective range.</td>
+<td>-20.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_y</td>
+<td>float</td>
+<td>Maximum of y of the filter effective range.</td>
+<td>20.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_y</td>
+<td>float</td>
+<td>Minimum of y of the filter effective range.</td>
+<td>-20.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>filter_target_label.UNKNOWN</td>
+<td>boolean</td>
+<td>If true, unknown objects are filtered.</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>filter_target_label.CAR</td>
+<td>boolean</td>
+<td>If true, car objects are filtered.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>filter_target_label.TRUCK</td>
+<td>boolean</td>
+<td>If true, truck objects are filtered.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>filter_target_label.BUS</td>
+<td>boolean</td>
+<td>If true, bus objects are filtered.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>filter_target_label.TRAILER</td>
+<td>boolean</td>
+<td>If true, trailer objects are filtered.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>filter_target_label.MOTORCYCLE</td>
+<td>boolean</td>
+<td>If true, motorcycle objects are filtered.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>filter_target_label.BICYCLE</td>
+<td>boolean</td>
+<td>If true, bicycle objects are filtered.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>filter_target_label.PEDESTRIAN</td>
+<td>boolean</td>
+<td>If true, pedestrian objects are filtered.</td>
+<td>false</td>
+<td>N/A</td>
 </tr>
 </tbody>
 </table>
