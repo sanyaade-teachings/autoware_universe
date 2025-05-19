@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#planning-validator" class="md-skip">
+        <a href="#macro-rendering-error" class="md-skip">
           Skip to content
         </a>
       
@@ -14171,55 +14171,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#supported-features" class="md-nav__link">
-    Supported features
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inputsoutputs" class="md-nav__link">
-    Inputs/Outputs
-  </a>
-  
-    <nav class="md-nav" aria-label="Inputs/Outputs">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#inputs" class="md-nav__link">
-    Inputs
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#outputs" class="md-nav__link">
-    Outputs
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    Parameters
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -14236,238 +14187,29 @@
   
 
 
-<div><h1 id="planning-validator">Planning Validator<a class="headerlink" href="#planning-validator" title="Permanent link">#</a></h1>
-<p>The <code>autoware_planning_validator</code> is a module that checks the validity of a trajectory before it is published. The status of the validation can be viewed in the <code>/diagnostics</code> and <code>/validation_status</code> topics. When an invalid trajectory is detected, the <code>autoware_planning_validator</code> will process the trajectory following the selected option: "0. publish the trajectory as it is", "1. stop publishing the trajectory", "2. publish the last validated trajectory".</p>
-<p><img alt="autoware_planning_validator" src="image/planning_validator.drawio.svg"></p>
-<h2 id="supported-features">Supported features<a class="headerlink" href="#supported-features" title="Permanent link">#</a></h2>
-<p>The following features are supported for trajectory validation and can have thresholds set by parameters:</p>
-<ul>
-<li><strong>Invalid field</strong> : e.g. Inf, Nan</li>
-<li><strong>Trajectory points interval</strong> : invalid if any of the distance of trajectory points is too large</li>
-<li><strong>Curvature</strong> : invalid if the trajectory has too sharp turns that is not feasible for the given vehicle kinematics</li>
-<li><strong>Relative angle</strong> : invalid if the yaw angle changes too fast in the sequence of trajectory points</li>
-<li>
-<p><strong>Lateral acceleration</strong> : invalid if the expected lateral acceleration/deceleration is too large. Lateral acceleration is calculated using the formula:</p>
-<div class="arithmatex">\[
-a_{lat} = v_{lon}^2 * \kappa
-\]</div>
-<p>Where <span class="arithmatex">\(v_{lon}\)</span> is longitudinal velocity and <span class="arithmatex">\(\kappa\)</span> is curvature. Since the acceleration embedded in path points is perpendicular to the derived lateral acceleration, projections are not considered. The velocity and acceleration assigned to each point are directed toward the next path point.</p>
-</li>
-</ul>
-<ul>
-<li>
-<p><strong>Lateral jerk</strong> : invalid if the rate of change of lateral acceleration is too large. Lateral jerk is calculated using the formula:</p>
-<div class="arithmatex">\[
-j_{lat} = v_{lon}^3 * \frac{d\kappa}{ds} + 3 * v_{lon}^2 * a_{lon} * \kappa
-\]</div>
-<p>Where <span class="arithmatex">\(v_{lon}\)</span> is longitudinal velocity, <span class="arithmatex">\(\kappa\)</span> is curvature, <span class="arithmatex">\(a_{lon}\)</span> is longitudinal acceleration, and <span class="arithmatex">\(\frac{d\kappa}{ds}\)</span> is the rate of curvature change with respect to distance. In this implementation, the curvature change (<span class="arithmatex">\(\frac{d\kappa}{ds}\)</span>) is not considered, simplifying the calculation to only the second term. The lateral jerk represents how quickly the lateral acceleration changes, which affects ride comfort and vehicle stability.</p>
-</li>
-</ul>
-<ul>
-<li><strong>Longitudinal acceleration/deceleration</strong> : invalid if the acceleration/deceleration in the trajectory point is too large</li>
-<li><strong>Steering angle</strong> : invalid if the expected steering value is too large estimated from trajectory curvature</li>
-<li><strong>Steering angle rate</strong> : invalid if the expected steering rate value is too large</li>
-<li><strong>Velocity deviation</strong> : invalid if the planning velocity is too far from the ego velocity</li>
-<li><strong>Distance deviation</strong> : invalid if the ego is too far from the trajectory</li>
-<li><strong>Longitudinal distance deviation</strong> : invalid if the trajectory is too far from ego in longitudinal direction</li>
-<li><strong>Forward trajectory length</strong> : invalid if the trajectory length is not enough to stop within a given deceleration</li>
-<li><strong>Yaw difference</strong> : invalid if the difference between the ego yaw and closest trajectory yaw is too large</li>
-<li><strong>Trajectory Shift</strong> : invalid if the lat./long. distance between two consecutive trajectories near the Ego exceed the thresholds.</li>
-</ul>
-<p>The following features are to be implemented.</p>
-<ul>
-<li><strong>(TODO) TTC calculation</strong> : invalid if the expected time-to-collision is too short on the trajectory</li>
-</ul>
-<h2 id="inputsoutputs">Inputs/Outputs<a class="headerlink" href="#inputsoutputs" title="Permanent link">#</a></h2>
-<h3 id="inputs">Inputs<a class="headerlink" href="#inputs" title="Permanent link">#</a></h3>
-<p>The <code>autoware_planning_validator</code> takes in the following inputs:</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>~/input/kinematics</code></td>
-<td>nav_msgs/Odometry</td>
-<td>ego pose and twist</td>
-</tr>
-<tr>
-<td><code>~/input/acceleration</code></td>
-<td>geometry_msgs/AccelWithCovarianceStamped</td>
-<td>current acceleration of the ego vehicle</td>
-</tr>
-<tr>
-<td><code>~/input/trajectory</code></td>
-<td>autoware_planning_msgs/Trajectory</td>
-<td>target trajectory to be validated in this node</td>
-</tr>
-</tbody>
-</table>
-<h3 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">#</a></h3>
-<p>It outputs the following:</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>~/output/trajectory</code></td>
-<td>autoware_planning_msgs/Trajectory</td>
-<td>validated trajectory</td>
-</tr>
-<tr>
-<td><code>~/output/validation_status</code></td>
-<td>planning_validator/PlanningValidatorStatus</td>
-<td>validator status to inform the reason why the trajectory is valid/invalid</td>
-</tr>
-<tr>
-<td><code>/diagnostics</code></td>
-<td>diagnostic_msgs/DiagnosticStatus</td>
-<td>diagnostics to report errors</td>
-</tr>
-</tbody>
-</table>
-<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-<th>Range</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>invalid_trajectory_handling_type</td>
-<td>integer</td>
-<td>Operation option when invalid trajectory is detected. 0: publish the trajectory even if it is invalid, 1: stop publishing the trajectory, 2: publish the last validated trajectory.</td>
-<td>0</td>
-<td>[0, 1, 2]</td>
-</tr>
-<tr>
-<td>publish_diag</td>
-<td>boolean</td>
-<td>If true, diagnostic messages are published.</td>
-<td>1</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>diag_error_count_threshold</td>
-<td>integer</td>
-<td>If the number of consecutive invalid trajectories exceeds this threshold, the Diag will be set to ERROR.</td>
-<td>0</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>display_on_terminal</td>
-<td>boolean</td>
-<td>Show error messages on the terminal.</td>
-<td>1</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>thresholds.interval</td>
-<td>float</td>
-<td>Interval threshold.</td>
-<td>100</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>thresholds.relative_angle</td>
-<td>float</td>
-<td>Relative angle threshold (= 115 degrees).</td>
-<td>2</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>thresholds.curvature</td>
-<td>float</td>
-<td>Curvature threshold.</td>
-<td>1</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>thresholds.lateral_acc</td>
-<td>float</td>
-<td>Lateral acceleration threshold.</td>
-<td>9.8</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>thresholds.longitudinal_max_acc</td>
-<td>float</td>
-<td>Maximum longitudinal acceleration threshold.</td>
-<td>9.8</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>thresholds.longitudinal_min_acc</td>
-<td>float</td>
-<td>Minimum longitudinal acceleration threshold.</td>
-<td>-9.8</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>thresholds.steering</td>
-<td>float</td>
-<td>Steering threshold.</td>
-<td>1.414</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>thresholds.steering_rate</td>
-<td>float</td>
-<td>Steering rate threshold.</td>
-<td>10</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>thresholds.velocity_deviation</td>
-<td>float</td>
-<td>Velocity deviation threshold.</td>
-<td>100</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>thresholds.distance_deviation</td>
-<td>float</td>
-<td>Distance deviation threshold.</td>
-<td>100</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>thresholds.longitudinal_distance_deviation</td>
-<td>float</td>
-<td>Longitudinal distance deviation threshold.</td>
-<td>1</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>parameters.forward_trajectory_length_acceleration</td>
-<td>float</td>
-<td>The required trajectory length is calculated as the distance needed to stop from the current speed at this deceleration.</td>
-<td>-3</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>parameters.forward_trajectory_length_margin</td>
-<td>float</td>
-<td>An error is raised if the required trajectory length is less than this distance. Setting it to 0 means an error will occur if even slightly exceeding the end of the path, therefore, a certain margin is necessary.</td>
-<td>2</td>
-<td>N/A</td>
-</tr>
-</tbody>
-</table></div>
+<div><h1 id="macro-rendering-error"><em>Macro Rendering Error</em><a class="headerlink" href="#macro-rendering-error" title="Permanent link">#</a></h1>
+<p><em>File</em>: <code>planning/autoware_planning_validator/README.md</code></p>
+<p><em>KeyError</em>: 'description'</p>
+<div class="highlight"><pre><span></span><code>Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/mkdocs_macros/plugin.py", line 688, in render
+    return md_template.render(**page_variables)
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "&lt;template&gt;", line 69, in top-level template code
+  File "/home/runner/work/autoware_universe/autoware_universe/mkdocs_macros.py", line 73, in json_to_markdown
+    return format_json(data)
+  File "/home/runner/work/autoware_universe/autoware_universe/mkdocs_macros.py", line 64, in format_json
+    markdown_table = tabulate(extract_parameter_info(parameters), headers="keys", tablefmt="github")
+  File "/home/runner/work/autoware_universe/autoware_universe/mkdocs_macros.py", line 57, in extract_parameter_info
+    params.extend(extract_parameter_info(v["properties"], k + "."))
+  File "/home/runner/work/autoware_universe/autoware_universe/mkdocs_macros.py", line 57, in extract_parameter_info
+    params.extend(extract_parameter_info(v["properties"], k + "."))
+  File "/home/runner/work/autoware_universe/autoware_universe/mkdocs_macros.py", line 52, in extract_parameter_info
+    param["Description"] = v["description"]
+KeyError: 'description'
+</code></pre></div></div>
 
 
 
