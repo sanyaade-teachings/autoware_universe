@@ -14213,6 +14213,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#scatter-operations" class="md-nav__link">
+    Scatter operations
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licenses" class="md-nav__link">
+    Licenses
+  </a>
+  
+    <nav class="md-nav" aria-label="Licenses">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scatter" class="md-nav__link">
+    Scatter
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -14247,7 +14274,32 @@ This requires the installation of <code>spconv_cpp</code> which is automatically
 <h3 id="argsort">Argsort<a class="headerlink" href="#argsort" title="Permanent link">#</a></h3>
 <p>We provide an implementation for the <code>Argsort</code> operation as a plugin since the <code>TopK</code> TensorRT implementation has limitations in the size of elements it can handle.</p>
 <h3 id="bev-pool">BEV Pool<a class="headerlink" href="#bev-pool" title="Permanent link">#</a></h3>
-<p>We provide a wrapper for the <code>bev_pool</code> operation presented in <a href="https://github.com/mit-han-lab/bevfusion">BEVFusion</a>. Please refer to the original paper for specific details.</p></div>
+<p>We provide a wrapper for the <code>bev_pool</code> operation presented in <a href="https://github.com/mit-han-lab/bevfusion">BEVFusion</a>. Please refer to the original paper for specific details.</p>
+<h3 id="scatter-operations">Scatter operations<a class="headerlink" href="#scatter-operations" title="Permanent link">#</a></h3>
+<p>We provide a wrapper for the <code>segment_csr</code> operation presented in <a href="https://github.com/rusty1s/pytorch_scatter/tree/master">torch_scatter</a>. Please refer to the original code for specific details.</p>
+<h2 id="licenses">Licenses<a class="headerlink" href="#licenses" title="Permanent link">#</a></h2>
+<h3 id="scatter">Scatter<a class="headerlink" href="#scatter" title="Permanent link">#</a></h3>
+<p>The codes under the <code>src/scatter_ops</code> and <code>include/autoware/scatter_ops</code> directory are copied and modified from <a href="https://github.com/wy17646051/tensorrt_scatter/tree/master">the original implementation</a> and <a href="https://github.com/rusty1s/pytorch_scatter/tree/master">TensorRT adaptation</a>.
+The original codes belong to the MIT license (original implementation) and Apache License 2.0, whereas further modifications are provided under Apache License 2.0.</p>
+<blockquote>
+<p>MIT License
+Copyright (c) 2020 Matthias Fey <a href="mailto:matthias.fey@tu-dortmund.de">matthias.fey@tu-dortmund.de</a></p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>
+</blockquote></div>
 
 
 
