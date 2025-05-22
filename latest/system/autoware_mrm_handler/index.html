@@ -14333,9 +14333,14 @@
 <td>Required to execute proper MRM (send gear cmd)</td>
 </tr>
 <tr>
+<td><code>/system/emergency/turn_indicators_cmd</code></td>
+<td><code>autoware_vehicle_msgs::msg::TurnIndicatorsCommand</code></td>
+<td>Required to execute proper MRM (send turn signal cmd)</td>
+</tr>
+<tr>
 <td><code>/system/emergency/hazard_lights_cmd</code></td>
 <td><code>autoware_vehicle_msgs::msg::HazardLightsCommand</code></td>
-<td>Required to execute proper MRM (send turn signal cmd)</td>
+<td>Required to execute proper MRM (send hazard signal cmd)</td>
 </tr>
 <tr>
 <td><code>/system/fail_safe/mrm_state</code></td>
@@ -14438,6 +14443,13 @@
 <td>turning_hazard_on.emergency</td>
 <td>boolean</td>
 <td>If this parameter is true, hazard lamps will be turned on during emergency state.</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>turning_indicator_on.emergency</td>
+<td>boolean</td>
+<td>If this parameter is true, turning indicators will be disabled during emergency state.</td>
 <td>true</td>
 <td>N/A</td>
 </tr>
