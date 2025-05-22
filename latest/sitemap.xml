@@ -1521,26 +1521,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/latest/visualization/autoware_overlay_rviz_plugin/autoware_mission_details_overlay_rviz_plugin/</loc>
-         <lastmod>2025-05-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/latest/visualization/autoware_overlay_rviz_plugin/autoware_overlay_rviz_plugin/</loc>
-         <lastmod>2025-05-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/latest/visualization/autoware_overlay_rviz_plugin/autoware_string_stamped_overlay_rviz_plugin/</loc>
-         <lastmod>2025-05-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/latest/visualization/autoware_perception_rviz_plugin/</loc>
-         <lastmod>2025-05-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/latest/visualization/tier4_adapi_rviz_plugin/</loc>
          <lastmod>2025-05-22</lastmod>
          <changefreq>daily</changefreq>
@@ -1562,11 +1542,6 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/latest/visualization/tier4_planning_factor_rviz_plugin/</loc>
-         <lastmod>2025-05-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/latest/visualization/tier4_planning_rviz_plugin/</loc>
          <lastmod>2025-05-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
