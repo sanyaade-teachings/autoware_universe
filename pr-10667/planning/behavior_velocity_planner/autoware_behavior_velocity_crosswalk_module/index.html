@@ -14999,7 +14999,7 @@ The label of each plot is <code>&lt;crosswalk module id&gt;-&lt;pedestrian uuid&
 <h3 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">#</a></h3>
 <ul>
 <li>Q. The ego stopped around the crosswalk even though there were no crosswalk user objects.<ul>
-<li>A. See <a href="https://autowarefoundation.github.io/autoware_universe/pr-5583/planning/autoware_behavior_velocity_crosswalk_module/#stuck-vehicle-detection">Stuck Vehicle Detection</a>.</li>
+<li>A. See <a href="#stuck-prevention-on-the-crosswalk">Stuck Vehicle Detection</a></li>
 </ul>
 </li>
 <li>Q. The crosswalk virtual wall suddenly appeared resulting in the sudden stop.<ul>
@@ -15018,11 +15018,11 @@ The label of each plot is <code>&lt;crosswalk module id&gt;-&lt;pedestrian uuid&
 <h3 id="parameter-tuning">Parameter Tuning<a class="headerlink" href="#parameter-tuning" title="Permanent link">#</a></h3>
 <ul>
 <li>Q. The ego's yield behavior is too conservative.<ul>
-<li>A. Tune <code>ego_pass_later_margin</code> described in <a href="https://autowarefoundation.github.io/autoware_universe/pr-5583/planning/autoware_behavior_velocity_crosswalk_module/#stuck-vehicle-detection">Yield Decision</a></li>
+<li>A. Tune <code>ego_pass_later_margin</code> described in <a href="#yield-the-way-to-the-pedestrians">Yield Decision</a></li>
 </ul>
 </li>
 <li>Q. The ego's yield behavior is too aggressive.<ul>
-<li>A. Tune <code>ego_pass_later_margin</code> described in <a href="https://autowarefoundation.github.io/autoware_universe/pr-5583/planning/autoware_behavior_velocity_crosswalk_module/#stuck-vehicle-detection">Yield Decision</a></li>
+<li>A. Tune <code>ego_pass_later_margin</code> described in <a href="#yield-the-way-to-the-pedestrians">Yield Decision</a></li>
 </ul>
 </li>
 </ul>
