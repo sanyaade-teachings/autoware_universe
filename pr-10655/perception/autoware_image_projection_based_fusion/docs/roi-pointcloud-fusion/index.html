@@ -14517,14 +14517,14 @@
 <td>integer</td>
 <td>The minimum number of points that a cluster must contain to be considered as valid.</td>
 <td>2</td>
-<td>N/A</td>
+<td>&gt;2</td>
 </tr>
 <tr>
 <td>max_cluster_size</td>
 <td>integer</td>
 <td>The maximum number of points that a cluster must contain to be considered as valid.</td>
 <td>20</td>
-<td>N/A</td>
+<td>&gt;2</td>
 </tr>
 <tr>
 <td>cluster_2d_tolerance</td>
@@ -14538,6 +14538,13 @@
 <td>float</td>
 <td>A scale factor for resizing RoI while checking if points are inside the RoI.</td>
 <td>1</td>
+<td>&gt;0.0</td>
+</tr>
+<tr>
+<td>max_object_size</td>
+<td>float</td>
+<td>The maximum size of the object to be considered as valid.</td>
+<td>2</td>
 <td>&gt;0.0</td>
 </tr>
 </tbody>
