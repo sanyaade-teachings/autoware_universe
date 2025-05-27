@@ -756,21 +756,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/planning/autoware_obstacle_cruise_planner/</loc>
-         <lastmod>2025-05-27</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/planning/autoware_obstacle_cruise_planner/docs/debug/</loc>
-         <lastmod>2025-05-27</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/planning/autoware_obstacle_stop_planner/</loc>
-         <lastmod>2025-05-27</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/main/planning/autoware_path_optimizer/</loc>
          <lastmod>2025-05-27</lastmod>
          <changefreq>daily</changefreq>
