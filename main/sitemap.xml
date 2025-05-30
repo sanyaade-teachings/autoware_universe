@@ -1396,11 +1396,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_system_diagnostic_monitor/</loc>
-         <lastmod>2025-05-30</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_system_monitor/</loc>
          <lastmod>2025-05-30</lastmod>
          <changefreq>daily</changefreq>
