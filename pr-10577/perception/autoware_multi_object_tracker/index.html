@@ -13937,26 +13937,6 @@ In addition, when associating observations to tracers, data association have gat
 <p>Models for pedestrians, bicycles (motorcycles), cars and unknown are available.
 The pedestrian or bicycle tracker is running at the same time as the respective EKF model in order to enable the transition between pedestrian and bicycle tracking.
 For big vehicles such as trucks and buses, we have separate models for passenger cars and large vehicles because they are difficult to distinguish from passenger cars and are not stable. Therefore, separate models are prepared for passenger cars and big vehicles, and these models are run at the same time as the respective EKF models to ensure stability.</p>
-<!-- Write how this package works. Flowcharts and figures are great. Add sub-sections as you like.
-
-Example:
-  ### Flowcharts
-
-  ...(PlantUML or something)
-
-  ### State Transitions
-
-  ...(PlantUML or something)
-
-  ### How to filter target obstacles
-
-  ...
-
-  ### How to optimize trajectory
-
-  ...
--->
-
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
 <h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
 <p>Multiple inputs are pre-defined in the input channel parameters (described below) and the inputs can be configured</p>
@@ -13988,17 +13968,17 @@ Example:
 </ul>
 <p>Up to 12 detection inputs can be configured (detection01 through detection12). Each input consists of an objects topic and its corresponding channel configuration.</p>
 <p>Example configurations:</p>
-<ol>
+<ul>
 <li>Single detection input:</li>
-</ol>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="nt">input/detection01/objects</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/perception/object_recognition/detection/objects</span>
 <span class="nt">input/detection01/channel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">detected_objects</span><span class="w"> </span><span class="c1"># general input channel type</span>
 <span class="nt">input/detection02/objects</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">input/objects02</span>
 <span class="nt">input/detection02/channel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">none</span><span class="w"> </span><span class="c1"># Disabled</span>
 </code></pre></div>
-<ol>
+<ul>
 <li>Multiple detection inputs:</li>
-</ol>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="c1"># lidar centerpoint</span>
 <span class="nt">input/detection01/objects</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/perception/object_recognition/detection/lidar_centerpoint/objects</span>
 <span class="nt">input/detection01/channel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lidar_centerpoint</span>
