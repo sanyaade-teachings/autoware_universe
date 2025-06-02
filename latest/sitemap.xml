@@ -321,16 +321,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/latest/localization/autoware_ndt_scan_matcher/</loc>
-         <lastmod>2025-06-02</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/latest/localization/autoware_ndt_scan_matcher/include/autoware/ndt_scan_matcher/ndt_omp/</loc>
-         <lastmod>2025-06-02</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/latest/localization/autoware_pose2twist/</loc>
          <lastmod>2025-06-02</lastmod>
          <changefreq>daily</changefreq>
