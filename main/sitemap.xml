@@ -1516,6 +1516,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/main/visualization/tier4_control_mode_rviz_plugin/</loc>
+         <lastmod>2025-06-03</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/main/visualization/tier4_datetime_rviz_plugin/</loc>
          <lastmod>2025-06-03</lastmod>
          <changefreq>daily</changefreq>
