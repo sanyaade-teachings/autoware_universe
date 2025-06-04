@@ -1221,62 +1221,62 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi/</loc>
-         <lastmod>2025-06-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi/document/autoware-state/</loc>
-         <lastmod>2025-06-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi/document/diagnostics/</loc>
-         <lastmod>2025-06-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi/document/fail-safe/</loc>
-         <lastmod>2025-06-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi/document/interface/</loc>
-         <lastmod>2025-06-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi/document/localization/</loc>
-         <lastmod>2025-06-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi/document/motion/</loc>
-         <lastmod>2025-06-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi/document/operation-mode/</loc>
-         <lastmod>2025-06-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi/document/parameters/</loc>
-         <lastmod>2025-06-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi/document/routing/</loc>
-         <lastmod>2025-06-04</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_helpers/autoware_adapi_adaptors/</loc>
          <lastmod>2025-06-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_helpers/autoware_automatic_pose_initializer/</loc>
+         <lastmod>2025-06-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_universe/</loc>
+         <lastmod>2025-06-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_universe/document/autoware-state/</loc>
+         <lastmod>2025-06-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_universe/document/diagnostics/</loc>
+         <lastmod>2025-06-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_universe/document/fail-safe/</loc>
+         <lastmod>2025-06-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_universe/document/interface/</loc>
+         <lastmod>2025-06-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_universe/document/localization/</loc>
+         <lastmod>2025-06-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_universe/document/motion/</loc>
+         <lastmod>2025-06-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_universe/document/operation-mode/</loc>
+         <lastmod>2025-06-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_universe/document/parameters/</loc>
+         <lastmod>2025-06-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_universe/document/routing/</loc>
          <lastmod>2025-06-04</lastmod>
          <changefreq>daily</changefreq>
     </url>
