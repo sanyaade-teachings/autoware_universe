@@ -26,11 +26,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/latest/common/autoware_adapi_specs/</loc>
-         <lastmod>2025-06-12</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/latest/common/autoware_agnocast_wrapper/</loc>
          <lastmod>2025-06-12</lastmod>
          <changefreq>daily</changefreq>
