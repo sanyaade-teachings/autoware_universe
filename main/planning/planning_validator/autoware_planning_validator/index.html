@@ -13568,7 +13568,10 @@ j_{lat} = v_{lon}^3 * \frac{d\kappa}{ds} + 3 * v_{lon}^2 * a_{lon} * \kappa
 <li><strong>Distance deviation</strong> : invalid if the ego is too far from the trajectory</li>
 <li><strong>Longitudinal distance deviation</strong> : invalid if the trajectory is too far from ego in longitudinal direction</li>
 <li><strong>Forward trajectory length</strong> : invalid if the trajectory length is not enough to stop within a given deceleration</li>
-<li><strong>Yaw difference</strong> : invalid if the difference between the ego yaw and closest trajectory yaw is too large</li>
+<li><strong>Yaw deviation</strong> : invalid if the difference between the ego yaw and closest trajectory yaw is too large.<ul>
+<li>in general planning is not responsible for keeping a low yaw deviation, so this metric is checked only when the closest trajectory yaw changes by more than <code>nearest_yaw_trajectory_shift_required_for_checking</code> between successive trajectories.</li>
+</ul>
+</li>
 <li><strong>Trajectory Shift</strong> : invalid if the lat./long. distance between two consecutive trajectories near the Ego exceed the thresholds.</li>
 </ul>
 <p>The following features are to be implemented.</p>
