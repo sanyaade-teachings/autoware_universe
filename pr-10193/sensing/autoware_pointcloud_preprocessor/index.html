@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#macro-rendering-error" class="md-skip">
+        <a href="#autoware_pointcloud_preprocessor" class="md-skip">
           Skip to content
         </a>
       
@@ -13441,6 +13441,117 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#purpose" class="md-nav__link">
+    Purpose
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inner-workings-algorithms" class="md-nav__link">
+    Inner-workings / Algorithms
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inputs-outputs" class="md-nav__link">
+    Inputs / Outputs
+  </a>
+  
+    <nav class="md-nav" aria-label="Inputs / Outputs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#input" class="md-nav__link">
+    Input
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" class="md-nav__link">
+    Output
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assumptions-known-limits" class="md-nav__link">
+    Assumptions / Known limits
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measuring-the-performance" class="md-nav__link">
+    Measuring the performance
+  </a>
+  
+    <nav class="md-nav" aria-label="Measuring the performance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benchmarking-the-pipeline" class="md-nav__link">
+    Benchmarking The Pipeline
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-error-detection-and-handling" class="md-nav__link">
+    (Optional) Error detection and handling
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-performance-characterization" class="md-nav__link">
+    (Optional) Performance characterization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencesexternal-links" class="md-nav__link">
+    References/External links
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#optional-future-extensions-unimplemented-parts" class="md-nav__link">
+    (Optional) Future extensions / Unimplemented parts
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -13457,21 +13568,1108 @@
   
 
 
-<div><h1 id="macro-rendering-error"><em>Macro Rendering Error</em><a class="headerlink" href="#macro-rendering-error" title="Permanent link">#</a></h1>
-<p><em>File</em>: <code>sensing/autoware_pointcloud_preprocessor/README.md</code></p>
-<p><em>FileNotFoundError</em>: [Errno 2] No such file or directory: 'sensing/autoware_pointcloud_preprocessor/schema/lanelet2_map_Filter_node.schema.json'</p>
-<div class="highlight"><pre><span></span><code>Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/mkdocs_macros/plugin.py", line 688, in render
-    return md_template.render(**page_variables)
-  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/environment.py", line 1295, in render
-    self.environment.handle_exception()
-  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/environment.py", line 942, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "&lt;template&gt;", line 54, in top-level template code
-  File "/home/runner/work/autoware_universe/autoware_universe/mkdocs_macros.py", line 71, in json_to_markdown
-    with open(json_schema_file_path) as f:
-FileNotFoundError: [Errno 2] No such file or directory: 'sensing/autoware_pointcloud_preprocessor/schema/lanelet2_map_Filter_node.schema.json'
-</code></pre></div></div>
+<div><h1 id="autoware_pointcloud_preprocessor">autoware_pointcloud_preprocessor<a class="headerlink" href="#autoware_pointcloud_preprocessor" title="Permanent link">#</a></h1>
+<h2 id="purpose">Purpose<a class="headerlink" href="#purpose" title="Permanent link">#</a></h2>
+<p>The <code>autoware_pointcloud_preprocessor</code> is a package that includes the following filters:</p>
+<ul>
+<li>removing outlier points</li>
+<li>cropping</li>
+<li>concatenating pointclouds</li>
+<li>correcting distortion</li>
+<li>downsampling</li>
+<li>densifying pointclouds</li>
+</ul>
+<h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
+<p>Detail description of each filter's algorithm is in the following links.</p>
+<table>
+<thead>
+<tr>
+<th>Filter Name</th>
+<th>Description</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>concatenate_data</td>
+<td>subscribe multiple pointclouds and concatenate them into a pointcloud</td>
+<td><a href="docs/concatenate-data/">link</a></td>
+</tr>
+<tr>
+<td>crop_box_filter</td>
+<td>remove points within a given box</td>
+<td><a href="docs/crop-box-filter/">link</a></td>
+</tr>
+<tr>
+<td>distortion_corrector</td>
+<td>compensate pointcloud distortion caused by ego vehicle's movement during 1 scan</td>
+<td><a href="docs/distortion-corrector/">link</a></td>
+</tr>
+<tr>
+<td>downsample_filter</td>
+<td>downsampling input pointcloud</td>
+<td><a href="docs/downsample-filter/">link</a></td>
+</tr>
+<tr>
+<td>outlier_filter</td>
+<td>remove points caused by hardware problems, rain drops and small insects as a noise</td>
+<td><a href="docs/outlier-filter/">link</a></td>
+</tr>
+<tr>
+<td>passthrough_filter</td>
+<td>remove points on the outside of a range in given field (e.g. x, y, z, intensity)</td>
+<td><a href="docs/passthrough-filter/">link</a></td>
+</tr>
+<tr>
+<td>pointcloud_accumulator</td>
+<td>accumulate pointclouds for a given amount of time</td>
+<td><a href="docs/pointcloud-accumulator/">link</a></td>
+</tr>
+<tr>
+<td>pointcloud_densifier</td>
+<td>enhance sparse point clouds by using information from previous frames</td>
+<td><a href="docs/pointcloud-densifier/">link</a></td>
+</tr>
+<tr>
+<td>vector_map_filter</td>
+<td>remove points on the outside of lane by using vector map</td>
+<td><a href="docs/vector-map-filter/">link</a></td>
+</tr>
+<tr>
+<td>vector_map_inside_area_filter</td>
+<td>remove points inside of vector map area that has given type by parameter</td>
+<td><a href="docs/vector-map-inside-area-filter/">link</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
+<h3 id="input">Input<a class="headerlink" href="#input" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/input/points</code></td>
+<td><code>sensor_msgs::msg::PointCloud2</code></td>
+<td>reference points</td>
+</tr>
+<tr>
+<td><code>~/input/indices</code></td>
+<td><code>pcl_msgs::msg::Indices</code></td>
+<td>reference indices</td>
+</tr>
+</tbody>
+</table>
+<h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/output/points</code></td>
+<td><code>sensor_msgs::msg::PointCloud2</code></td>
+<td>filtered points</td>
+</tr>
+</tbody>
+</table>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>voxel_size_x</td>
+<td>float</td>
+<td>voxel size along the x-axis [m]</td>
+<td>0.3</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>voxel_size_y</td>
+<td>float</td>
+<td>voxel size along the y-axis [m]</td>
+<td>0.3</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>voxel_size_z</td>
+<td>float</td>
+<td>voxel size along the z-axis [m]</td>
+<td>0.1</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>-----------------------------</td>
+<td>---------</td>
+<td>--------------------------------------------------------------------------------------------------------------------------------</td>
+<td>--------------</td>
+<td>-------------</td>
+</tr>
+<tr>
+<td>blockage_ratio_threshold</td>
+<td>float</td>
+<td>The threshold of blockage area ratio. If the blockage value exceeds this threshold, the diagnostic state will be set to ERROR.</td>
+<td>0.1</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>blockage_count_threshold</td>
+<td>float</td>
+<td>The threshold of number continuous blockage frames</td>
+<td>50</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>blockage_buffering_frames</td>
+<td>integer</td>
+<td>The number of buffering about blockage detection [range:1-200]</td>
+<td>2</td>
+<td>≥1<br>≤200</td>
+</tr>
+<tr>
+<td>blockage_buffering_interval</td>
+<td>integer</td>
+<td>The interval of buffering about blockage detection</td>
+<td>1</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>enable_dust_diag</td>
+<td>boolean</td>
+<td>enable dust diagnostic</td>
+<td>False</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>publish_debug_image</td>
+<td>boolean</td>
+<td>publish debug image</td>
+<td>False</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>dust_ratio_threshold</td>
+<td>float</td>
+<td>The threshold of dusty area ratio</td>
+<td>0.2</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>dust_count_threshold</td>
+<td>integer</td>
+<td>The threshold of number continuous frames include dusty area</td>
+<td>10</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>dust_kernel_size</td>
+<td>integer</td>
+<td>The kernel size of morphology processing in dusty area detection</td>
+<td>2</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>dust_buffering_frames</td>
+<td>integer</td>
+<td>The number of buffering about dusty area detection [range:1-200]</td>
+<td>10</td>
+<td>≥1<br>≤200</td>
+</tr>
+<tr>
+<td>dust_buffering_interval</td>
+<td>integer</td>
+<td>The interval of buffering about dusty area detection</td>
+<td>1</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>max_distance_range</td>
+<td>float</td>
+<td>Maximum view range for the LiDAR</td>
+<td>200.0</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>horizontal_resolution</td>
+<td>float</td>
+<td>The horizontal resolution of depth map image [deg/pixel]</td>
+<td>0.4</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>blockage_kernel</td>
+<td>integer</td>
+<td>The kernel size of morphology processing the detected blockage area</td>
+<td>10</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>angle_range</td>
+<td>array</td>
+<td>The effective range of LiDAR</td>
+<td>[0.0, 360.0]</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>vertical_bins</td>
+<td>integer</td>
+<td>The LiDAR channel</td>
+<td>40</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>is_channel_order_top2down</td>
+<td>boolean</td>
+<td>If the lidar channels are indexed from top to down</td>
+<td>True</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>horizontal_ring_id</td>
+<td>integer</td>
+<td>The id of horizontal ring of the LiDAR</td>
+<td>18</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>----------------</td>
+<td>---------</td>
+<td>--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</td>
+<td>-----------</td>
+<td>---------</td>
+</tr>
+<tr>
+<td>timeout_sec</td>
+<td>float</td>
+<td>Tolerance of time to publish the next pointcloud [s]. When this time limit is exceeded, the filter concatenates and publishes pointcloud, even if not all the point clouds are subscribed.</td>
+<td>0.1</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>input_offset</td>
+<td>array</td>
+<td>This parameter can control waiting time for each input sensor pointcloud [s]. You must to set the same length of offsets with input pointclouds numbers.</td>
+<td>[]</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>output_frame</td>
+<td>string</td>
+<td>Output frame id.</td>
+<td>base_link</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>input_topics</td>
+<td>array</td>
+<td>List of input topics.</td>
+<td>[]</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_queue_size</td>
+<td>integer</td>
+<td>Max queue size of input/output topics.</td>
+<td>5</td>
+<td>≥1</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>-------------------------------</td>
+<td>---------</td>
+<td>-------------------------------------------------------------------------------------------------------------------</td>
+<td>-----------</td>
+<td>---------</td>
+</tr>
+<tr>
+<td>min_x</td>
+<td>float</td>
+<td>minimum x-coordinate value for crop range in meters</td>
+<td>-1.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_y</td>
+<td>float</td>
+<td>minimum y-coordinate value for crop range in meters</td>
+<td>-1.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_z</td>
+<td>float</td>
+<td>minimum z-coordinate value for crop range in meters</td>
+<td>-1.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_x</td>
+<td>float</td>
+<td>maximum x-coordinate value for crop range in meters</td>
+<td>1.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_y</td>
+<td>float</td>
+<td>maximum y-coordinate value for crop range in meters</td>
+<td>1.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_z</td>
+<td>float</td>
+<td>maximum z-coordinate value for crop range in meters</td>
+<td>1.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>negative</td>
+<td>boolean</td>
+<td>if true, remove points within the box from the pointcloud; otherwise, remove points outside the box.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>processing_time_threshold_sec</td>
+<td>float</td>
+<td>Threshold in seconds. If the processing time of the node exceeds this value, a diagnostic warning will be issued.</td>
+<td>0.01</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>---------------------------------------</td>
+<td>---------</td>
+<td>-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</td>
+<td>-----------</td>
+<td>---------</td>
+</tr>
+<tr>
+<td>base_frame</td>
+<td>string</td>
+<td>The undistortion algorithm is based on a base frame, which must be the same as the twist frame.</td>
+<td>base_link</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>use_imu</td>
+<td>boolean</td>
+<td>Use IMU angular velocity, otherwise, use twist angular velocity.</td>
+<td>true</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>use_3d_distortion_correction</td>
+<td>boolean</td>
+<td>Use 3d distortion correction algorithm, otherwise, use 2d distortion correction algorithm.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>update_azimuth_and_distance</td>
+<td>boolean</td>
+<td>Flag to update the azimuth and distance values of each point after undistortion. If set to false, the azimuth and distance values will remain unchanged after undistortion, resulting in a mismatch with the updated x, y, z coordinates.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>processing_time_threshold_sec</td>
+<td>float</td>
+<td>Threshold in seconds. If the processing time of the node exceeds this value, a diagnostic warning will be issued.</td>
+<td>0.01</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>timestamp_mismatch_fraction_threshold</td>
+<td>float</td>
+<td>Threshold for the fraction of points that lack corresponding twist or IMU data within the allowed timestamp tolerance.</td>
+<td>0.01</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>----------------------------------</td>
+<td>---------</td>
+<td>-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</td>
+<td>---------------</td>
+<td>--------------------------------------------------</td>
+</tr>
+<tr>
+<td>x_max</td>
+<td>float</td>
+<td>Maximum of x in meters for <code>Fixed_xyz_ROI</code> mode</td>
+<td>18.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>x_min</td>
+<td>float</td>
+<td>Minimum of x in meters for <code>Fixed_xyz_ROI</code> mode</td>
+<td>-12.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>y_max</td>
+<td>float</td>
+<td>Maximum of y in meters for <code>Fixed_xyz_ROI</code> mode</td>
+<td>2.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>y_min</td>
+<td>float</td>
+<td>Minimum of y in meters for <code>Fixed_xyz_ROI</code> mode</td>
+<td>-2.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>z_max</td>
+<td>float</td>
+<td>Maximum of z in meters for <code>Fixed_xyz_ROI</code> mode</td>
+<td>10.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>z_min</td>
+<td>float</td>
+<td>Minimum of z in meters for <code>Fixed_xyz_ROI</code> mode</td>
+<td>0.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_azimuth_deg</td>
+<td>float</td>
+<td>The left limit of azimuth in degrees for <code>Fixed_azimuth_ROI</code> mode</td>
+<td>135.0</td>
+<td>≥0<br>≤360</td>
+</tr>
+<tr>
+<td>max_azimuth_deg</td>
+<td>float</td>
+<td>The right limit of azimuth in degrees for <code>Fixed_azimuth_ROI</code> mode</td>
+<td>225.0</td>
+<td>≥0<br>≤360</td>
+</tr>
+<tr>
+<td>max_distance</td>
+<td>float</td>
+<td>The limit distance in meters for <code>Fixed_azimuth_ROI</code> mode</td>
+<td>12.0</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>vertical_bins</td>
+<td>integer</td>
+<td>The number of vertical bins for the visibility histogram</td>
+<td>128</td>
+<td>≥1</td>
+</tr>
+<tr>
+<td>max_azimuth_diff</td>
+<td>float</td>
+<td>The azimuth difference threshold in degrees for ring_outlier_filter</td>
+<td>50.0</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>weak_first_distance_ratio</td>
+<td>float</td>
+<td>The maximum allowed ratio between consecutive weak point distances</td>
+<td>1.004</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>general_distance_ratio</td>
+<td>float</td>
+<td>The maximum allowed ratio between consecutive normal point distances</td>
+<td>1.03</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>weak_first_local_noise_threshold</td>
+<td>integer</td>
+<td>If the number of outliers among weak points is less than the weak_first_local_noise_threshold in the (max_azimuth - min_azimuth) / horizontal_bins interval, all points within the interval will not be filtered out.</td>
+<td>2</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>roi_mode</td>
+<td>string</td>
+<td>roi mode</td>
+<td>Fixed_xyz_ROI</td>
+<td>['Fixed_xyz_ROI', 'No_ROI', 'Fixed_azimuth_ROI']</td>
+</tr>
+<tr>
+<td>visibility_error_threshold</td>
+<td>float</td>
+<td>When the proportion of white pixels in the binary histogram falls below this parameter the diagnostic status becomes ERR</td>
+<td>0.5</td>
+<td>≥0.0<br>≤1.0</td>
+</tr>
+<tr>
+<td>visibility_warn_threshold</td>
+<td>float</td>
+<td>When the proportion of white pixels in the binary histogram falls below this parameter the diagnostic status becomes WARN</td>
+<td>0.7</td>
+<td>≥0.0<br>≤1.0</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>--------------</td>
+<td>--------</td>
+<td>-----------------------------</td>
+<td>-----------</td>
+<td>---------</td>
+</tr>
+<tr>
+<td>voxel_size_x</td>
+<td>float</td>
+<td>voxel size along x-axis [m]</td>
+<td>0.04</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>voxel_size_y</td>
+<td>float</td>
+<td>voxel size along y-axis [m]</td>
+<td>0.04</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>-----------------------</td>
+<td>---------</td>
+<td>--------------------------------------------------------</td>
+<td>-----------</td>
+<td>---------</td>
+</tr>
+<tr>
+<td>filter_limit_min</td>
+<td>integer</td>
+<td>minimum allowed field value</td>
+<td>0</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>filter_limit_max</td>
+<td>integer</td>
+<td>maximum allowed field value</td>
+<td>127</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>filter_field_name</td>
+<td>string</td>
+<td>filtering field name</td>
+<td>channel</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>keep_organized</td>
+<td>boolean</td>
+<td>flag to keep indices structure</td>
+<td>False</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>filter_limit_negative</td>
+<td>boolean</td>
+<td>flag to return whether the data is inside limit or not</td>
+<td>False</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>--------------</td>
+<td>--------</td>
+<td>---------------------------------</td>
+<td>-----------</td>
+<td>---------</td>
+</tr>
+<tr>
+<td>voxel_size_x</td>
+<td>float</td>
+<td>voxel size along the x-axis [m]</td>
+<td>1</td>
+<td>&gt;0.0</td>
+</tr>
+<tr>
+<td>voxel_size_y</td>
+<td>float</td>
+<td>voxel size along the y-axis [m]</td>
+<td>1</td>
+<td>&gt;0.0</td>
+</tr>
+<tr>
+<td>voxel_size_z</td>
+<td>float</td>
+<td>voxel size along the z-axis [m]</td>
+<td>1</td>
+<td>&gt;0.0</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>------------------------</td>
+<td>---------</td>
+<td>-------------------------</td>
+<td>-----------</td>
+<td>---------</td>
+</tr>
+<tr>
+<td>accumulation_time_sec</td>
+<td>float</td>
+<td>accumulation period [s]</td>
+<td>2</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>pointcloud_buffer_size</td>
+<td>integer</td>
+<td>buffer size</td>
+<td>50</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>---------------</td>
+<td>---------</td>
+<td>------------------------------------------------------------------------------------------------------------------------</td>
+<td>-----------</td>
+<td>---------</td>
+</tr>
+<tr>
+<td>min_neighbors</td>
+<td>integer</td>
+<td>If points in the circle centered on reference point is less than min_neighbors, a reference point is judged as outlier</td>
+<td>5</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>search_radius</td>
+<td>float</td>
+<td>Searching number of points included in search_radius</td>
+<td>0.2</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>------------</td>
+<td>---------</td>
+<td>---------------------------------</td>
+<td>-----------</td>
+<td>---------</td>
+</tr>
+<tr>
+<td>sample_num</td>
+<td>integer</td>
+<td>number of indices to be sampled</td>
+<td>1500</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>-------------------------------</td>
+<td>---------</td>
+<td>-------------------------------------------------------------------------------------------------------------------------------</td>
+<td>-----------</td>
+<td>-----------------</td>
+</tr>
+<tr>
+<td>distance_ratio</td>
+<td>float</td>
+<td>distance_ratio</td>
+<td>1.03</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>object_length_threshold</td>
+<td>float</td>
+<td>object_length_threshold</td>
+<td>0.05</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>max_rings_num</td>
+<td>integer</td>
+<td>max_rings_num</td>
+<td>128</td>
+<td>≥1</td>
+</tr>
+<tr>
+<td>max_points_num_per_ring</td>
+<td>integer</td>
+<td>Set this value large enough such that HFoV / resolution &lt; max_points_num_per_ring</td>
+<td>4000</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>publish_outlier_pointcloud</td>
+<td>boolean</td>
+<td>Flag to publish outlier pointcloud and visibility score. Due to performance concerns, please set to false during experiments.</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_azimuth_deg</td>
+<td>float</td>
+<td>The left limit of azimuth for visibility score calculation</td>
+<td>0.0</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>max_azimuth_deg</td>
+<td>float</td>
+<td>The right limit of azimuth for visibility score calculation</td>
+<td>360.0</td>
+<td>≥0.0<br>≤360.0</td>
+</tr>
+<tr>
+<td>max_distance</td>
+<td>float</td>
+<td>The limit distance for visibility score calculation</td>
+<td>12.0</td>
+<td>≥0.0</td>
+</tr>
+<tr>
+<td>vertical_bins</td>
+<td>integer</td>
+<td>The number of vertical bin for visibility histogram</td>
+<td>128</td>
+<td>≥1</td>
+</tr>
+<tr>
+<td>horizontal_bins</td>
+<td>integer</td>
+<td>The number of horizontal bin for visibility histogram</td>
+<td>36</td>
+<td>≥1</td>
+</tr>
+<tr>
+<td>noise_threshold</td>
+<td>integer</td>
+<td>The threshold value for distinguishing noise from valid points in the frequency image</td>
+<td>2</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>processing_time_threshold_sec</td>
+<td>float</td>
+<td>Threshold in seconds. If the processing time of the node exceeds this value, a diagnostic warning will be issued.</td>
+<td>0.01</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>---------------------------------------------</td>
+<td>---------</td>
+<td>--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</td>
+<td>------------</td>
+<td>-------------------</td>
+</tr>
+<tr>
+<td>timeout_sec</td>
+<td>float</td>
+<td>Tolerance of time to publish the next pointcloud [s]. When this time limit is exceeded, the filter concatenates and publishes pointcloud, even if not all the point clouds are subscribed.</td>
+<td>0.033</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>input_offset</td>
+<td>array</td>
+<td>This parameter can control waiting time for each input sensor pointcloud [s]. You must to set the same length of offsets with input pointclouds numbers.</td>
+<td>[]</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>input_twist_topic_type</td>
+<td>string</td>
+<td>Topic type for twist. Currently supports 'twist' or 'odom'.</td>
+<td>twist</td>
+<td>['twist', 'odom']</td>
+</tr>
+<tr>
+<td>output_frame</td>
+<td>string</td>
+<td>Output frame.</td>
+<td>base_link</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>keep_input_frame_in_synchronized_pointcloud</td>
+<td>boolean</td>
+<td>Flag to indicate if input frame should be kept in synchronized point cloud.</td>
+<td>True</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>input_topics</td>
+<td>array</td>
+<td>List of input topics.</td>
+<td>[]</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>synchronized_pointcloud_postfix</td>
+<td>string</td>
+<td>Postfix for the synchronized point cloud.</td>
+<td>pointcloud</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>max_queue_size</td>
+<td>integer</td>
+<td>Max queue size of input/output topics.</td>
+<td>5</td>
+<td>≥1</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>--------------</td>
+<td>---------</td>
+<td>-----------------------------</td>
+<td>-------------------------------</td>
+<td>---------</td>
+</tr>
+<tr>
+<td>polygon_type</td>
+<td>string</td>
+<td>polygon type to be filtered</td>
+<td>no_obstacle_segmentation_area</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>use_z_filter</td>
+<td>boolean</td>
+<td>use z value for filtering</td>
+<td>false</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>z_threshold</td>
+<td>float</td>
+<td>z threshold for filtering</td>
+<td>0.0</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>--------------</td>
+<td>--------</td>
+<td>---------------------------------</td>
+<td>-----------</td>
+<td>---------</td>
+</tr>
+<tr>
+<td>voxel_size_x</td>
+<td>float</td>
+<td>the voxel size along x-axis [m]</td>
+<td>0.3</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>voxel_size_y</td>
+<td>float</td>
+<td>the voxel size along y-axis [m]</td>
+<td>0.3</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>voxel_size_z</td>
+<td>float</td>
+<td>the voxel size along z-axis [m]</td>
+<td>0.1</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Default</td>
+<td>Range</td>
+</tr>
+<tr>
+<td>------------------------</td>
+<td>---------</td>
+<td>--------------------------------------------</td>
+<td>-----------</td>
+<td>---------</td>
+</tr>
+<tr>
+<td>voxel_size_x</td>
+<td>float</td>
+<td>the voxel size along x-axis [m]</td>
+<td>0.3</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>voxel_size_y</td>
+<td>float</td>
+<td>the voxel size along y-axis [m]</td>
+<td>0.3</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>voxel_size_z</td>
+<td>float</td>
+<td>the voxel size along z-axis [m]</td>
+<td>0.1</td>
+<td>≥0</td>
+</tr>
+<tr>
+<td>voxel_points_threshold</td>
+<td>integer</td>
+<td>the minimum number of points in each voxel</td>
+<td>2</td>
+<td>≥1</td>
+</tr>
+</tbody>
+</table>
+<h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
+<p><code>autoware::pointcloud_preprocessor::Filter</code> is implemented based on pcl_perception [1] because
+of <a href="https://github.com/ros-perception/perception_pcl/issues/9">this issue</a>.</p>
+<h2 id="measuring-the-performance">Measuring the performance<a class="headerlink" href="#measuring-the-performance" title="Permanent link">#</a></h2>
+<p>In Autoware, point cloud data from each LiDAR sensor undergoes preprocessing in the sensing pipeline before being input
+into the perception pipeline. The preprocessing stages are illustrated in the diagram below:</p>
+<p><img alt="pointcloud_preprocess_pipeline.drawio.png" src="docs/image/pointcloud_preprocess_pipeline.drawio.png"></p>
+<p>Each stage in the pipeline incurs a processing delay. Mostly, we've used <code>ros2 topic delay /topic_name</code> to measure
+the time between the message header and the current time. This approach works well for small-sized messages. However,
+when dealing with large point cloud messages, this method introduces an additional delay. This is primarily because
+accessing these large point cloud messages externally impacts the pipeline's performance.</p>
+<p>Our sensing/perception nodes are designed to run within composable node containers, leveraging intra-process
+communication. External subscriptions to these messages (like using ros2 topic delay or rviz2) impose extra delays and
+can even slow down the pipeline by subscribing externally. Therefore, these measurements will not be accurate.</p>
+<p>To mitigate this issue, we've adopted a method where each node in the pipeline reports its pipeline latency time.
+This approach ensures the integrity of intra-process communication and provides a more accurate measure of delays in the
+pipeline.</p>
+<h3 id="benchmarking-the-pipeline">Benchmarking The Pipeline<a class="headerlink" href="#benchmarking-the-pipeline" title="Permanent link">#</a></h3>
+<p>The nodes within the pipeline report the pipeline latency time, indicating the duration from the sensor driver's pointcloud
+output to the node's output. This data is crucial for assessing the pipeline's health and efficiency.</p>
+<p>When running Autoware, you can monitor the pipeline latency times for each node in the pipeline by subscribing to the
+following ROS 2 topics:</p>
+<ul>
+<li><code>/sensing/lidar/LidarX/crop_box_filter_self/debug/pipeline_latency_ms</code></li>
+<li><code>/sensing/lidar/LidarX/crop_box_filter_mirror/debug/pipeline_latency_ms</code></li>
+<li><code>/sensing/lidar/LidarX/distortion_corrector/debug/pipeline_latency_ms</code></li>
+<li><code>/sensing/lidar/LidarX/ring_outlier_filter/debug/pipeline_latency_ms</code></li>
+<li><code>/sensing/lidar/concatenate_data_synchronizer/debug/sensing/lidar/LidarX/pointcloud/pipeline_latency_ms</code></li>
+</ul>
+<p>These topics provide the pipeline latency times, giving insights into the delays at various stages of the pipeline
+from the sensor output of LidarX to each subsequent node.</p>
+<h2 id="optional-error-detection-and-handling">(Optional) Error detection and handling<a class="headerlink" href="#optional-error-detection-and-handling" title="Permanent link">#</a></h2>
+<h2 id="optional-performance-characterization">(Optional) Performance characterization<a class="headerlink" href="#optional-performance-characterization" title="Permanent link">#</a></h2>
+<h2 id="referencesexternal-links">References/External links<a class="headerlink" href="#referencesexternal-links" title="Permanent link">#</a></h2>
+<p>[1] <a href="https://github.com/ros-perception/perception_pcl/blob/ros2/pcl_ros/src/pcl_ros/filters/filter.cpp">https://github.com/ros-perception/perception_pcl/blob/ros2/pcl_ros/src/pcl_ros/filters/filter.cpp</a></p>
+<h2 id="optional-future-extensions-unimplemented-parts">(Optional) Future extensions / Unimplemented parts<a class="headerlink" href="#optional-future-extensions-unimplemented-parts" title="Permanent link">#</a></h2></div>
 
 
 
