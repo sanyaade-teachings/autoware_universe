@@ -931,6 +931,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/latest/planning/motion_velocity_planner/autoware_motion_velocity_boundary_departure_prevention_module/</loc>
+         <lastmod>2025-06-19</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/latest/planning/motion_velocity_planner/autoware_motion_velocity_dynamic_obstacle_stop_module/</loc>
          <lastmod>2025-06-19</lastmod>
          <changefreq>daily</changefreq>
