@@ -1201,11 +1201,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_helpers/autoware_adapi_adaptors/</loc>
-         <lastmod>2025-06-19</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/main/system/autoware_default_adapi_helpers/autoware_automatic_pose_initializer/</loc>
          <lastmod>2025-06-19</lastmod>
          <changefreq>daily</changefreq>
