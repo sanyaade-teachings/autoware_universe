@@ -121,6 +121,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/pr-10839/control/autoware_control_command_gate/</loc>
+         <lastmod>2025-06-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/pr-10839/control/autoware_control_performance_analysis/</loc>
          <lastmod>2025-06-20</lastmod>
          <changefreq>daily</changefreq>
@@ -187,6 +192,11 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/pr-10839/control/autoware_smart_mpc_trajectory_follower/</loc>
+         <lastmod>2025-06-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/pr-10839/control/autoware_stop_mode_operator/</loc>
          <lastmod>2025-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -931,6 +941,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/pr-10839/planning/motion_velocity_planner/autoware_motion_velocity_boundary_departure_prevention_module/</loc>
+         <lastmod>2025-06-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/pr-10839/planning/motion_velocity_planner/autoware_motion_velocity_dynamic_obstacle_stop_module/</loc>
          <lastmod>2025-06-20</lastmod>
          <changefreq>daily</changefreq>
@@ -1191,6 +1206,16 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/pr-10839/system/autoware_command_mode_decider/</loc>
+         <lastmod>2025-06-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/pr-10839/system/autoware_command_mode_switcher/</loc>
+         <lastmod>2025-06-20</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/pr-10839/system/autoware_command_mode_types/</loc>
          <lastmod>2025-06-20</lastmod>
          <changefreq>daily</changefreq>
@@ -1202,11 +1227,6 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/pr-10839/system/autoware_component_state_monitor/</loc>
-         <lastmod>2025-06-20</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://autowarefoundation.github.io/autoware_universe/pr-10839/system/autoware_default_adapi_helpers/autoware_adapi_adaptors/</loc>
          <lastmod>2025-06-20</lastmod>
          <changefreq>daily</changefreq>
     </url>
