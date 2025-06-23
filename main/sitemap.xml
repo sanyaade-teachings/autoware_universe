@@ -981,6 +981,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/main/planning/planning_validator/autoware_planning_validator_intersection_collision_checker/</loc>
+         <lastmod>2025-06-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/main/planning/sampling_based_planner/autoware_bezier_sampler/</loc>
          <lastmod>2025-06-23</lastmod>
          <changefreq>daily</changefreq>
