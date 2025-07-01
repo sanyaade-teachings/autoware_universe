@@ -15956,9 +15956,16 @@ To solve that, this module provides a parameter for the minimum avoidance speed,
 <td>N/A</td>
 </tr>
 <tr>
-<td>lateral.min_jerk_values</td>
+<td>min_jerk_values.avoid</td>
 <td>array</td>
-<td>Avoidance path is generated with this jerk when there is enough distance from ego.</td>
+<td>Minimum lateral jerk constraint when laterally shifting to avoid an obstacle.</td>
+<td>[0.2, 0.2, 0.2]</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>min_jerk_values.return</td>
+<td>array</td>
+<td>Minimum lateral jerk constraint when laterally shifting to return to the original lane.</td>
 <td>[0.2, 0.2, 0.2]</td>
 <td>N/A</td>
 </tr>
