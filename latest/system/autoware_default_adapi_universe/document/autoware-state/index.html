@@ -13743,7 +13743,8 @@ The service <code>/autoware/shutdown</code> to change autoware state to finalizi
 <p><img alt="autoware-state-architecture" src="../images/autoware-state-architecture.drawio.svg"></p>
 <h2 id="conversion">Conversion<a class="headerlink" href="#conversion" title="Permanent link">#</a></h2>
 <p>This is the correspondence between AD API states and autoware states.
-The launch state is the data that this node holds internally.</p>
+The launch state is the data that this node holds internally.
+For the routing state arrival, the first 2.0 seconds correspond to ArrivedGoal, the rest correspond to WaitingForRoute.</p>
 <p><img alt="autoware-state-table" src="../images/autoware-state-table.drawio.svg"></p></div>
 
 
