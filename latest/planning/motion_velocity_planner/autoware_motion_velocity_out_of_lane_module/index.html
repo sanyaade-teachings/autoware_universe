@@ -13830,6 +13830,17 @@ If the time to collision is bellow the <code>ttc.threshold</code> parameter valu
 <p><img alt="ttcs" src="docs/ttcs.png"></p>
 <p>In the debug visualization, the ttc (in seconds) is displayed on top of its corresponding trajectory point.
 The color of the text is red if the collision should be avoided and green otherwise.</p>
+<h4 id="validation-using-the-lanelet-map">Validation using the lanelet map<a class="headerlink" href="#validation-using-the-lanelet-map" title="Permanent link">#</a></h4>
+<p>When parameter <code>object.validate_predicted_paths_on_lanelets</code> is set to <code>true</code>,
+an additional check is performed before considering a collision between the out of lane area and a predicted path.</p>
+<p>First, the possible sequences of lanelets followed by the predicted path are calculated such that:</p>
+<ul>
+<li>each lanelet in the sequence follows the previous one (according to the lanelet map);</li>
+<li>the sequence fully contains the predicted path.</li>
+</ul>
+<p>Then, for a collision to be considered, one of the <a href="#2-other-lanelets">"other lanelets"</a> overlapped by the out of lane area must be inside the calculated sequence.</p>
+<p>This feature allows the module to ignore collisions caused by nonsensical predicted paths, or by predicted paths that "merge" into the ego lane and that should be handled by other modules.
+Indeed, lanelets that merge into the ego lane (i.e., precede a trajectory lanelet) are not included in the "other lanelets".</p>
 <h3 id="6-calculate-the-stop-or-slowdown-point">6. Calculate the stop or slowdown point<a class="headerlink" href="#6-calculate-the-stop-or-slowdown-point" title="Permanent link">#</a></h3>
 <p>First, the minimum stopping distance of the ego vehicle is calculated based on the jerk and deceleration constraints set by the velocity smoother parameters.</p>
 <p>We then search for the furthest pose along the trajectory where the ego footprint stays inside of the ego lane (calculate in step 2) and constraint the search to be between the minimum stopping distance and the 1st trajectory point with a collision to avoid (as determined in the previous step).
@@ -13938,6 +13949,11 @@ Otherwise, the stop or slowdown pose will only be discarded after no out of lane
 <td><code>ignore_behind_ego</code></td>
 <td>bool</td>
 <td>[-] if true, objects behind the ego vehicle are ignored</td>
+</tr>
+<tr>
+<td><code>validate_predicted_paths_on_lanelets</code></td>
+<td>bool</td>
+<td>[-] if true, an out of lane collision is only considered if the predicted path fully follows a sequence of lanelets that include the out of lane lanelet</td>
 </tr>
 </tbody>
 </table>
