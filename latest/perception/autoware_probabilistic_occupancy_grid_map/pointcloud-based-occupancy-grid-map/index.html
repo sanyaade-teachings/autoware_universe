@@ -14061,12 +14061,10 @@ The ray trace is done by Bresenham's line algorithm.
 <p>Fill in the unknown cells.
    Based on the assumption that <code>UNKNOWN</code> is behind the obstacle, the cells that are more than a distance margin from each obstacle point are filled with <code>UNKNOWN</code></p>
 <p><img alt="pointcloud_based_occupancy_grid_map_side_view_2nd" src="../image/pointcloud_based_occupancy_grid_map_side_view_2nd.svg"></p>
-<p>There are three reasons for setting a distance margin.</p>
-<ul>
-<li>It is unlikely that a point on the ground will be immediately behind an obstacle.</li>
-<li>The obstacle point cloud is processed and may not match the raw pointcloud.</li>
-<li>The input may be inaccurate and obstacle points may not be determined as obstacles.</li>
-</ul>
+<p>There are three reasons for setting a distance margin.
+ - It is unlikely that a point on the ground will be immediately behind an obstacle.
+ - The obstacle point cloud is processed and may not match the raw pointcloud.
+ - The input may be inaccurate and obstacle points may not be determined as obstacles.</p>
 <p>When the parameter <code>grid_map_type</code> is "OccupancyGridMapProjectiveBlindSpot" and the <code>scan_origin</code> is a sensor frame like <code>velodyne_top</code> for instance, for each obstacle pointcloud, if there are no <em>visible</em> raw pointclouds that are located above the projected ray from the <code>scan_origin</code> to that obstacle pointcloud, the cells between the obstacle pointcloud and the <code>projected point</code> are filled with <code>UNKNOWN</code>. Note that the <code>scan_origin</code> should not be <code>base_link</code> if this flag is true because otherwise all the cells behind the obstacle point clouds would be filled with <code>UNKNOWN</code>.</p>
 <p><img alt="pointcloud_based_occupancy_grid_map_side_view_2nd_projection" src="../image/pointcloud_based_occupancy_grid_map_side_view_2nd_projection.drawio.svg"></p>
 </li>
