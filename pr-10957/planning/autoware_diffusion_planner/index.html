@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#macro-rendering-error" class="md-skip">
+        <a href="#autoware-diffusion-planner" class="md-skip">
           Skip to content
         </a>
       
@@ -13815,6 +13815,84 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#features" class="md-nav__link">
+    Features
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inputs" class="md-nav__link">
+    Inputs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outputs" class="md-nav__link">
+    Outputs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing" class="md-nav__link">
+    Testing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    ❗ Limitations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-contribution" class="md-nav__link">
+    Development &amp; Contribution
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    License
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -13831,21 +13909,281 @@
   
 
 
-<div><h1 id="macro-rendering-error"><em>Macro Rendering Error</em><a class="headerlink" href="#macro-rendering-error" title="Permanent link">#</a></h1>
-<p><em>File</em>: <code>planning/autoware_diffusion_planner/README.md</code></p>
-<p><em>FileNotFoundError</em>: [Errno 2] No such file or directory: 'localization/autoware_diffusion_planner/schema/diffusion_planner.schema.json'</p>
-<div class="highlight"><pre><span></span><code>Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/mkdocs_macros/plugin.py", line 688, in render
-    return md_template.render(**page_variables)
-  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/environment.py", line 1295, in render
-    self.environment.handle_exception()
-  File "/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/environment.py", line 942, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "&lt;template&gt;", line 46, in top-level template code
-  File "/home/runner/work/autoware_universe/autoware_universe/mkdocs_macros.py", line 71, in json_to_markdown
-    with open(json_schema_file_path) as f:
-FileNotFoundError: [Errno 2] No such file or directory: 'localization/autoware_diffusion_planner/schema/diffusion_planner.schema.json'
-</code></pre></div></div>
+<div><h1 id="autoware-diffusion-planner">Autoware Diffusion Planner<a class="headerlink" href="#autoware-diffusion-planner" title="Permanent link">#</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">#</a></h2>
+<p>The <strong>Autoware Diffusion Planner</strong> is a trajectory generation module for autonomous vehicles, designed to work within the <a href="https://autoware.org/">Autoware</a> ecosystem. It leverages the <a href="https://github.com/ZhengYinan-AIR/Diffusion-Planner">Diffusion Planner</a> model, as described in the paper <a href="https://arxiv.org/abs/2501.15564">"Diffusion-Based Planning for Autonomous Driving with Flexible Guidance"</a> by Zheng et al. <!-- cSpell:ignore Zheng --></p>
+<p>This planner generates smooth, feasible, and safe trajectories by considering:</p>
+<ul>
+<li>Dynamic and static obstacles</li>
+<li>Vehicle kinematics</li>
+<li>User-defined constraints</li>
+<li>Lanelet2 map context</li>
+<li>Traffic signals and speed limits</li>
+</ul>
+<p>It is implemented as a ROS 2 component node, making it easy to integrate into Autoware-based stacks. The node is aimed at working within the proposed <a href="https://github.com/tier4/new_planning_framework">Autoware new planning framework</a>.</p>
+<hr>
+<h2 id="features">Features<a class="headerlink" href="#features" title="Permanent link">#</a></h2>
+<ul>
+<li>
+<p><strong>Diffusion-based trajectory generation</strong> for flexible and robust planning</p>
+<p><a href="media/diffusion_planner.gif"><img alt="Diffusion-Based trajectory generation" src="media/diffusion_planner.gif"></a></p>
+</li>
+</ul>
+<ul>
+<li>
+<p><strong>Integration with Lanelet2 maps</strong> for lane-level context</p>
+<p><a href="media/lanelet_map_integration.png"><img alt="Lanelet Map Integration" src="media/lanelet_map_integration.png"></a></p>
+</li>
+</ul>
+<ul>
+<li>
+<p><strong>Dynamic and static obstacle handling</strong> using perception inputs</p>
+<p><a href="media/diffusion_planner_reacts_to_bus.gif"><img alt="Static Agent Reaction" src="media/diffusion_planner_reacts_to_bus.gif"></a></p>
+<p><a href="media/reaction_to_other_agents.gif"><img alt="Diffusion Planner" src="media/reaction_to_other_agents.gif"></a></p>
+</li>
+</ul>
+<ul>
+<li>
+<p><strong>Traffic signal and speed limit awareness</strong></p>
+<p><a href="media/traffic_light_support.gif"><img alt="Traffic Light Support" src="media/traffic_light_support.gif"></a></p>
+</li>
+</ul>
+<ul>
+<li><strong>ONNX Runtime</strong> inference for fast neural network execution</li>
+<li><strong>ROS 2 publishers</strong> for planned trajectories, predicted objects, and debug markers</li>
+</ul>
+<hr>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>plugins_path</td>
+<td>string</td>
+<td>Path to libautoware_tensorrt_plugins.so file for the diffusion planner</td>
+<td>$(find-pkg-share autoware_tensorrt_plugins)/plugins/libautoware_tensorrt_plugins.so</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>artifact_dir</td>
+<td>string</td>
+<td>Path to the Artifact(onnx model, etc.) directory</td>
+<td>$(env HOME)/autoware_data/diffusion_planner</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>onnx_model_path</td>
+<td>string</td>
+<td>Path to the ONNX model file for the diffusion planner</td>
+<td>$(var artifact_dir)/diffusion_planner.onnx</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>args_path</td>
+<td>string</td>
+<td>Path to model argument/configuration file</td>
+<td>$(var artifact_dir)/diffusion_planner.param.json</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>planning_frequency_hz</td>
+<td>float</td>
+<td>Planning frequency in Hz</td>
+<td>10.0</td>
+<td>&gt;0</td>
+</tr>
+<tr>
+<td>ignore_neighbors</td>
+<td>boolean</td>
+<td>Ignore neighbor agents</td>
+<td>False</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>ignore_unknown_neighbors</td>
+<td>boolean</td>
+<td>Ignore neighbor agents with unknown class</td>
+<td>True</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>predict_neighbor_trajectory</td>
+<td>boolean</td>
+<td>Predict trajectories for neighbor agents</td>
+<td>True</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>update_traffic_light_group_info</td>
+<td>boolean</td>
+<td>Enable updating of traffic light group info</td>
+<td>True</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>traffic_light_group_msg_timeout_seconds</td>
+<td>float</td>
+<td>Timeout for traffic light group messages (seconds)</td>
+<td>0.2</td>
+<td>&gt;0</td>
+</tr>
+<tr>
+<td>build_only</td>
+<td>boolean</td>
+<td>On build only, do not run the planner</td>
+<td>False</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>debug_params.publish_debug_map</td>
+<td>boolean</td>
+<td>Publish debug map markers</td>
+<td>False</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>debug_params.publish_debug_route</td>
+<td>boolean</td>
+<td>Publish debug route markers</td>
+<td>False</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<p>Parameters can be set via YAML (see <code>config/diffusion_planner.param.yaml</code>).</p>
+<hr>
+<h2 id="inputs">Inputs<a class="headerlink" href="#inputs" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Message Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/input/odometry</code></td>
+<td>nav_msgs/msg/Odometry</td>
+<td>Ego vehicle odometry</td>
+</tr>
+<tr>
+<td><code>~/input/acceleration</code></td>
+<td>geometry_msgs/msg/AccelWithCovarianceStamped</td>
+<td>Ego acceleration</td>
+</tr>
+<tr>
+<td><code>~/input/tracked_objects</code></td>
+<td>autoware_perception_msgs/msg/TrackedObjects</td>
+<td>Detected dynamic objects</td>
+</tr>
+<tr>
+<td><code>~/input/traffic_signals</code></td>
+<td>autoware_perception_msgs/msg/TrafficLightGroupArray</td>
+<td>Traffic light states</td>
+</tr>
+<tr>
+<td><code>~/input/vector_map</code></td>
+<td>autoware_map_msgs/msg/LaneletMapBin</td>
+<td>Lanelet2 map</td>
+</tr>
+<tr>
+<td><code>~/input/route</code></td>
+<td>autoware_planning_msgs/msg/LaneletRoute</td>
+<td>Route information</td>
+</tr>
+</tbody>
+</table>
+<h2 id="outputs">Outputs<a class="headerlink" href="#outputs" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Message Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>~/output/trajectory</code></td>
+<td>autoware_planning_msgs/msg/Trajectory</td>
+<td>Planned trajectory for the ego vehicle</td>
+</tr>
+<tr>
+<td><code>~/output/trajectories</code></td>
+<td>autoware_new_planning_msgs/msg/Trajectories</td>
+<td>Multiple candidate trajectories</td>
+</tr>
+<tr>
+<td><code>~/output/predicted_objects</code></td>
+<td>autoware_perception_msgs/msg/PredictedObjects</td>
+<td>Predicted future states of dynamic objects</td>
+</tr>
+<tr>
+<td><code>~/debug/lane_marker</code></td>
+<td>visualization_msgs/msg/MarkerArray</td>
+<td>Lane debug markers</td>
+</tr>
+<tr>
+<td><code>~/debug/route_marker</code></td>
+<td>visualization_msgs/msg/MarkerArray</td>
+<td>Route debug markers</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="testing">Testing<a class="headerlink" href="#testing" title="Permanent link">#</a></h2>
+<p>Unit tests are provided and can be run with:</p>
+<div class="highlight"><pre><span></span><code>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--packages-select<span class="w"> </span>autoware_diffusion_planner
+colcon<span class="w"> </span>test-result<span class="w"> </span>--all
+</code></pre></div>
+<hr>
+<h2 id="limitations">❗ Limitations<a class="headerlink" href="#limitations" title="Permanent link">#</a></h2>
+<p>While the Diffusion Planner shows promising capabilities, there are several limitations to be aware of:</p>
+<ul>
+<li><strong>Route Termination</strong>:
+  The route input to the model consists of a sequence of preferred lanelets from the current position to the goal region. However, <strong>this route does not necessarily end exactly at the goal position</strong>. As a result, the ego vehicle <strong>may continue driving past the goal</strong> instead of stopping at the target location.</li>
+</ul>
+<ul>
+<li><strong>Training Dataset Domain Gap</strong>:
+  The provided diffusion model checkpoint was trained on datasets using a <strong>proprietary Lanelet2 map that is not publicly available</strong>. Consequently, <strong>performance may significantly degrade when running on other maps</strong>, especially in environments with different topology or tagging conventions.</li>
+</ul>
+<ul>
+<li><strong>Route Adherence &amp; Lane Changing</strong>:
+  The model sometimes <strong>fails to strictly follow the preferred lanelet route</strong>. If the ego vehicle leaves the preferred lane (e.g., to avoid an obstacle), it tends to <strong>only return to the route during curves</strong>. It <strong>seldom performs deliberate lane changes</strong> to merge back into the correct route on straight segments.</li>
+</ul>
+<ul>
+<li><strong>Agent and Obstacle Avoidance</strong>:
+  Although the planner <strong>reacts to other agents and can perform avoidance maneuvers</strong>, this behavior is <strong>not fully reliable</strong>. In some cases, <strong>collisions with static or dynamic obstacles may still occur</strong> due to ignored agents or insufficient context comprehension.</li>
+</ul>
+<ul>
+<li><strong>Lack of Static Object Context</strong>:
+  Static environment context such as <strong>traffic cones, guard rails, or construction barriers</strong> is <strong>not currently provided to the model</strong>. Instead, an <strong>empty tensor</strong> is passed in their place, which can lead to <strong>limited understanding of occlusions or drivable boundaries</strong>.</li>
+</ul>
+<hr>
+<h2 id="development-contribution">Development &amp; Contribution<a class="headerlink" href="#development-contribution" title="Permanent link">#</a></h2>
+<ul>
+<li>Follow the <a href="https://autowarefoundation.github.io/autoware-documentation/main/contributing/">Autoware coding guidelines</a>.</li>
+<li>Contributions, bug reports, and feature requests are welcome via GitHub issues and pull requests.</li>
+</ul>
+<hr>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">#</a></h2>
+<ul>
+<li><a href="https://github.com/ZhengYinan-AIR/Diffusion-Planner">Diffusion Planner (original repo)</a></li>
+<li><a href="https://github.com/tier4/Diffusion-Planner">Diffusion planner (our fork of the previous repo, used to train the model)</a></li>
+<li><a href="https://arxiv.org/abs/2309.00615">"Diffusion-Based Planning for Autonomous Driving with Flexible Guidance"</a></li>
+</ul>
+<hr>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">#</a></h2>
+<p>This package is released under the Apache 2.0 License.</p></div>
 
 
 
