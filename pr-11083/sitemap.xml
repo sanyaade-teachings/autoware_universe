@@ -621,6 +621,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/pr-11083/perception/autoware_simpl_prediction/</loc>
+         <lastmod>2025-07-31</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/pr-11083/perception/autoware_simple_object_merger/</loc>
          <lastmod>2025-07-31</lastmod>
          <changefreq>daily</changefreq>
@@ -982,6 +987,11 @@
     </url>
     <url>
          <loc>https://autowarefoundation.github.io/autoware_universe/pr-11083/planning/motion_velocity_planner/autoware_motion_velocity_out_of_lane_module/</loc>
+         <lastmod>2025-07-31</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://autowarefoundation.github.io/autoware_universe/pr-11083/planning/motion_velocity_planner/autoware_motion_velocity_road_user_stop_module/</loc>
          <lastmod>2025-07-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
