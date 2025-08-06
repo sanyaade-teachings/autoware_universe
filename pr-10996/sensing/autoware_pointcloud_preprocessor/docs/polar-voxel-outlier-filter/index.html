@@ -14363,7 +14363,7 @@
 <span class="c1"># - distance      (float32): Pre-computed radius</span>
 <span class="c1"># - azimuth       (float32): Pre-computed azimuth angle</span>
 <span class="c1"># - elevation     (float32): Pre-computed elevation angle</span>
-<span class="c1"># - return_type   (uint8):   Return type classification (1=primary, 2-5=secondary, etc.)</span>
+<span class="c1"># - return_type   (uint8):   Return type classification (primary=[1], secondary=all others)</span>
 </code></pre></div>
 <p><strong>Note</strong>: The filter automatically detects the presence of polar coordinate fields and return type information, choosing the optimal processing path. Advanced two-criteria filtering is enabled when <code>use_return_type_classification=true</code>.</p>
 <h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
@@ -14385,9 +14385,9 @@ Uses pre-computed polar coordinates directly from the point fields:</p>
 <h3 id="voxel-index-calculation">Voxel Index Calculation<a class="headerlink" href="#voxel-index-calculation" title="Permanent link">#</a></h3>
 <p>Each point is assigned to a voxel based on:</p>
 <ul>
-<li><strong>Radius Index</strong>: <code>floor(radius / radius_resolution)</code></li>
-<li><strong>Azimuth Index</strong>: <code>floor(azimuth / azimuth_resolution)</code></li>
-<li><strong>Elevation Index</strong>: <code>floor(elevation / elevation_resolution)</code></li>
+<li><strong>Radius Index</strong>: <code>floor(radius / radial_resolution_m)</code></li>
+<li><strong>Azimuth Index</strong>: <code>floor(azimuth / azimuth_resolution_rad)</code></li>
+<li><strong>Elevation Index</strong>: <code>floor(elevation / elevation_resolution_rad)</code></li>
 </ul>
 <h3 id="filtering-methodology">Filtering Methodology<a class="headerlink" href="#filtering-methodology" title="Permanent link">#</a></h3>
 <p>The filter uses different algorithms depending on the input point cloud format:</p>
@@ -14424,11 +14424,11 @@ Uses pre-computed polar coordinates directly from the point fields:</p>
 <h3 id="return-type-management">Return Type Management<a class="headerlink" href="#return-type-management" title="Permanent link">#</a></h3>
 <ul>
 <li><strong>Primary Returns</strong>: Typically stronger, more reliable returns (default: [1])</li>
-<li><strong>Secondary Returns</strong>: Weaker returns, usually from partially transparent objects (default: [2,3,4,5])</li>
+<li><strong>Secondary Returns</strong>: All return types not specified as primary (automatically includes [2,3,4,5,etc.])</li>
 <li><strong>Classification Control</strong>: Can be disabled to process all returns equally</li>
 <li><strong>Filtering Control</strong>: Can optionally exclude secondary returns from output</li>
 </ul>
-<p>Note that primary and second returns vary between sensors and return modes, so parametrization should be performed after studying real sensor data.</p>
+<p>Note that primary and secondary returns vary between sensors and return modes, so parametrization should be performed after studying real sensor data.</p>
 <h2 id="inputs-outputs">Inputs / Outputs<a class="headerlink" href="#inputs-outputs" title="Permanent link">#</a></h2>
 <p>This implementation inherits <code>autoware::pointcloud_preprocessor::Filter</code> class, please refer <a href="../../">README</a>.</p>
 <h3 id="additional-debug-topics">Additional Debug Topics<a class="headerlink" href="#additional-debug-topics" title="Permanent link">#</a></h3>
@@ -14473,19 +14473,19 @@ Uses pre-computed polar coordinates directly from the point fields:</p>
 </thead>
 <tbody>
 <tr>
-<td><code>radius_resolution</code></td>
+<td><code>radial_resolution_m</code></td>
 <td>double</td>
 <td>Resolution in radial direction (meters)</td>
 <td>0.5</td>
 </tr>
 <tr>
-<td><code>azimuth_resolution</code></td>
+<td><code>azimuth_resolution_rad</code></td>
 <td>double</td>
 <td>Resolution in azimuth direction (radians)</td>
 <td>0.0174 (~1°)</td>
 </tr>
 <tr>
-<td><code>elevation_resolution</code></td>
+<td><code>elevation_resolution_rad</code></td>
 <td>double</td>
 <td>Resolution in elevation direction (radians)</td>
 <td>0.0174 (~1°)</td>
@@ -14497,13 +14497,13 @@ Uses pre-computed polar coordinates directly from the point fields:</p>
 <td>2</td>
 </tr>
 <tr>
-<td><code>min_radius</code></td>
+<td><code>min_radius_m</code></td>
 <td>double</td>
 <td>Minimum radius to consider (meters)</td>
 <td>0.5</td>
 </tr>
 <tr>
-<td><code>max_radius</code></td>
+<td><code>max_radius_m</code></td>
 <td>double</td>
 <td>Maximum radius to consider (meters)</td>
 <td>100.0</td>
@@ -14544,12 +14544,6 @@ Uses pre-computed polar coordinates directly from the point fields:</p>
 <td>int[]</td>
 <td>Return types considered as primary returns</td>
 <td>[1]</td>
-</tr>
-<tr>
-<td><code>secondary_return_types</code></td>
-<td>int[]</td>
-<td>Return types considered as secondary returns</td>
-<td>[2, 3, 4, 5]</td>
 </tr>
 </tbody>
 </table>
@@ -14603,24 +14597,24 @@ Uses pre-computed polar coordinates directly from the point fields:</p>
 </thead>
 <tbody>
 <tr>
-<td>radius_resolution</td>
+<td>radial_resolution_m</td>
 <td>float</td>
 <td>the resolution in radial direction [m]</td>
-<td>0.5</td>
+<td>0.2</td>
 <td>≥0</td>
 </tr>
 <tr>
-<td>azimuth_resolution</td>
+<td>azimuth_resolution_rad</td>
 <td>float</td>
 <td>the resolution in azimuth direction [rad]</td>
-<td>0.0174</td>
+<td>0.025</td>
 <td>≥0</td>
 </tr>
 <tr>
-<td>elevation_resolution</td>
+<td>elevation_resolution_rad</td>
 <td>float</td>
 <td>the resolution in elevation direction [rad]</td>
-<td>0.0174</td>
+<td>0.05</td>
 <td>≥0</td>
 </tr>
 <tr>
@@ -14631,17 +14625,17 @@ Uses pre-computed polar coordinates directly from the point fields:</p>
 <td>≥1</td>
 </tr>
 <tr>
-<td>min_radius</td>
+<td>min_radius_m</td>
 <td>float</td>
 <td>the minimum radius to consider [m]</td>
 <td>0.5</td>
 <td>≥0</td>
 </tr>
 <tr>
-<td>max_radius</td>
+<td>max_radius_m</td>
 <td>float</td>
 <td>the maximum radius to consider [m]</td>
-<td>100.0</td>
+<td>300.0</td>
 <td>≥0</td>
 </tr>
 <tr>
@@ -14662,35 +14656,28 @@ Uses pre-computed polar coordinates directly from the point fields:</p>
 <td>secondary_noise_threshold</td>
 <td>float</td>
 <td>threshold for classifying primary vs secondary returns</td>
-<td>1.0</td>
+<td>4</td>
 <td>≥0</td>
 </tr>
 <tr>
 <td>primary_return_types</td>
 <td>array</td>
-<td>list of return type values considered as primary returns</td>
-<td>[1]</td>
-<td>N/A</td>
-</tr>
-<tr>
-<td>secondary_return_types</td>
-<td>array</td>
-<td>list of return type values considered as secondary returns</td>
-<td>[2, 3, 4, 5]</td>
+<td>list of return type values considered as primary returns (all others are secondary)</td>
+<td>[1, 6, 10]</td>
 <td>N/A</td>
 </tr>
 <tr>
 <td>filter_ratio_error_threshold</td>
 <td>float</td>
 <td>the filter ratio threshold for error diagnostics (ratio of output/input points)</td>
-<td>0.5</td>
+<td>0.7</td>
 <td>≥0<br>≤1</td>
 </tr>
 <tr>
 <td>filter_ratio_warn_threshold</td>
 <td>float</td>
 <td>the filter ratio threshold for warning diagnostics (ratio of output/input points)</td>
-<td>0.7</td>
+<td>0.3</td>
 <td>≥0<br>≤1</td>
 </tr>
 <tr>
@@ -14714,6 +14701,7 @@ Uses pre-computed polar coordinates directly from the point fields:</p>
 <li><strong>use_return_type_classification</strong>: Must be <code>true</code> to enable advanced two-criteria filtering</li>
 <li><strong>filter_secondary_returns</strong>: When <code>true</code>, only primary returns appear in output (regardless of filtering criteria)</li>
 <li><strong>secondary_noise_threshold</strong>: Higher values require stronger primary return dominance</li>
+<li><strong>primary_return_types</strong>: Only these return types are considered primary; all others are automatically secondary</li>
 <li><strong>Diagnostics</strong>: Visibility is only published when return type classification is enabled</li>
 </ul>
 <h2 id="assumptions-known-limits">Assumptions / Known limits<a class="headerlink" href="#assumptions-known-limits" title="Permanent link">#</a></h2>
@@ -14742,11 +14730,12 @@ Uses pre-computed polar coordinates directly from the point fields:</p>
 
 <span class="c1"># Example launch file integration:</span>
 <span class="c1"># &lt;node pkg="autoware_pointcloud_preprocessor" exec="polar_voxel_outlier_filter_node" name="polar_voxel_filter"&gt;</span>
-<span class="c1">#   &lt;param name="radius_resolution" value="1.0"/&gt;</span>
-<span class="c1">#   &lt;param name="azimuth_resolution" value="0.0349"/&gt;</span>
+<span class="c1">#   &lt;param name="radial_resolution_m" value="1.0"/&gt;</span>
+<span class="c1">#   &lt;param name="azimuth_resolution_rad" value="0.0349"/&gt;</span>
 <span class="c1">#   &lt;param name="voxel_points_threshold" value="3"/&gt;</span>
 <span class="c1">#   &lt;param name="use_return_type_classification" value="true"/&gt;</span>
 <span class="c1">#   &lt;param name="secondary_noise_threshold" value="2"/&gt;</span>
+<span class="c1">#   &lt;param name="primary_return_types" value="[1]"/&gt;</span>
 <span class="c1"># &lt;/node&gt;</span>
 </code></pre></div>
 <h3 id="ros-2-topics">ROS 2 Topics<a class="headerlink" href="#ros-2-topics" title="Permanent link">#</a></h3>
@@ -14869,8 +14858,8 @@ Uses pre-computed polar coordinates directly from the point fields:</p>
 <h3 id="parameter-tuning-guidelines">Parameter Tuning Guidelines<a class="headerlink" href="#parameter-tuning-guidelines" title="Permanent link">#</a></h3>
 <h4 id="basic-configuration">Basic Configuration<a class="headerlink" href="#basic-configuration" title="Permanent link">#</a></h4>
 <ul>
-<li><strong>For dense urban environments</strong>: Use smaller <code>radius_resolution</code> (0.2-0.5m) and <code>azimuth_resolution</code> (0.5-1°)</li>
-<li><strong>For highway scenarios</strong>: Use larger <code>radius_resolution</code> (0.5-1.0m) and moderate <code>azimuth_resolution</code> (1-2°)</li>
+<li><strong>For dense urban environments</strong>: Use smaller <code>radial_resolution_m</code> (0.2-0.5m) and <code>azimuth_resolution_rad</code> (0.5-1°)</li>
+<li><strong>For highway scenarios</strong>: Use larger <code>radial_resolution_m</code> (0.5-1.0m) and moderate <code>azimuth_resolution_rad</code> (1-2°)</li>
 <li><strong>For noisy sensors</strong>: Increase <code>voxel_points_threshold</code> (3-5 points)</li>
 <li><strong>For sparse data</strong>: Decrease <code>voxel_points_threshold</code> (1-2 points)</li>
 </ul>
@@ -14879,6 +14868,7 @@ Uses pre-computed polar coordinates directly from the point fields:</p>
 <li><strong>For aggressive noise removal</strong>: Lower <code>secondary_noise_threshold</code> (0-1)</li>
 <li><strong>For conservative filtering</strong>: Higher <code>secondary_noise_threshold</code> (2-4)</li>
 <li><strong>For primary-only output</strong>: Enable <code>filter_secondary_returns</code></li>
+<li><strong>For custom return classification</strong>: Adjust <code>primary_return_types</code> list (all others will be considered secondary returns)</li>
 <li><strong>For diagnostics</strong>: Tune error/warning thresholds based on expected performance</li>
 </ul>
 <h2 id="comparison-with-cartesian-voxel-filter">Comparison with Cartesian Voxel Filter<a class="headerlink" href="#comparison-with-cartesian-voxel-filter" title="Permanent link">#</a></h2>
