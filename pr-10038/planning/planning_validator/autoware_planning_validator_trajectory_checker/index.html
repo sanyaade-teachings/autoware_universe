@@ -8,20 +8,20 @@
       
       
       
-        <link rel="canonical" href="https://autowarefoundation.github.io/autoware_universe/pr-10038/planning/motion_velocity_planner/autoware_motion_velocity_obstacle_slow_down_module/">
+        <link rel="canonical" href="https://autowarefoundation.github.io/autoware_universe/pr-10038/planning/planning_validator/autoware_planning_validator_trajectory_checker/">
       
       
-        <link rel="prev" href="../autoware_motion_velocity_obstacle_cruise_module/">
+        <link rel="prev" href="../autoware_planning_validator_intersection_collision_checker/">
       
       
-        <link rel="next" href="../autoware_motion_velocity_obstacle_velocity_limiter_module/">
+        <link rel="next" href="../../sampling_based_planner/autoware_bezier_sampler/">
       
       <link rel="icon" href="../../../docs/assets/images/autoware-foundation.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.20">
     
     
       
-        <title>Obstacle Slow Down - Autoware Universe Documentation</title>
+        <title>Trajectory Checker - Autoware Universe Documentation</title>
       
     
     
@@ -77,7 +77,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#obstacle-slow-down" class="md-skip">
+        <a href="#trajectory-checker" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Obstacle Slow Down
+              Trajectory Checker
             
           </span>
         </div>
@@ -8736,7 +8736,7 @@
   
   
     <li class="md-nav__item">
-      <a href="./" class="md-nav__link">
+      <a href="../../motion_velocity_planner/autoware_motion_velocity_obstacle_slow_down_module/" class="md-nav__link">
         Obstacle Slow Down
       </a>
     </li>
@@ -8750,7 +8750,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_motion_velocity_obstacle_cruise_module/" class="md-nav__link">
+      <a href="../../motion_velocity_planner/autoware_motion_velocity_obstacle_cruise_module/" class="md-nav__link">
         Obstacle Cruise
       </a>
     </li>
@@ -8764,7 +8764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_motion_velocity_dynamic_obstacle_stop_module/" class="md-nav__link">
+      <a href="../../motion_velocity_planner/autoware_motion_velocity_dynamic_obstacle_stop_module/" class="md-nav__link">
         Dynamic Obstacle Stop
       </a>
     </li>
@@ -8778,7 +8778,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_motion_velocity_out_of_lane_module/" class="md-nav__link">
+      <a href="../../motion_velocity_planner/autoware_motion_velocity_out_of_lane_module/" class="md-nav__link">
         Out of Lane
       </a>
     </li>
@@ -8792,7 +8792,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_motion_velocity_obstacle_velocity_limiter_module/" class="md-nav__link">
+      <a href="../../motion_velocity_planner/autoware_motion_velocity_obstacle_velocity_limiter_module/" class="md-nav__link">
         Obstacle Velocity Limiter
       </a>
     </li>
@@ -8806,7 +8806,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../autoware_motion_velocity_run_out_module/" class="md-nav__link">
+      <a href="../../motion_velocity_planner/autoware_motion_velocity_run_out_module/" class="md-nav__link">
         Run Out
       </a>
     </li>
@@ -9251,7 +9251,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planning_validator/autoware_planning_validator" class="md-nav__link">
+      <a href="../autoware_planning_validator" class="md-nav__link">
         About Planning Validator
       </a>
     </li>
@@ -9265,7 +9265,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planning_validator/autoware_planning_validator_trajectory_checker" class="md-nav__link">
+      <a href="." class="md-nav__link">
         Trajectory Checker
       </a>
     </li>
@@ -9279,7 +9279,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planning_validator/autoware_planning_validator_intersection_collision_checker" class="md-nav__link">
+      <a href="../autoware_planning_validator_intersection_collision_checker" class="md-nav__link">
         Intersection Collision Checker
       </a>
     </li>
@@ -13938,71 +13938,121 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#role" class="md-nav__link">
-    Role
+  <a href="#supported-features" class="md-nav__link">
+    Supported features
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#activation" class="md-nav__link">
-    Activation
+  <a href="#parameters" class="md-nav__link">
+    Parameters
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#inner-workings-algorithms" class="md-nav__link">
-    Inner-workings / Algorithms
-  </a>
-  
-    <nav class="md-nav" aria-label="Inner-workings / Algorithms">
+    <nav class="md-nav" aria-label="Parameters">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#obstacle-filtering" class="md-nav__link">
-    Obstacle Filtering
+  <a href="#interval-check" class="md-nav__link">
+    Interval Check
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#slow-down-planning" class="md-nav__link">
-    Slow Down Planning
+  <a href="#curvature-check" class="md-nav__link">
+    Curvature Check
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sudden-deceleration-suppression" class="md-nav__link">
-    Sudden deceleration suppression
+  <a href="#relative-angle-check" class="md-nav__link">
+    Relative Angle Check
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#stable-slow-down-planning" class="md-nav__link">
-    Stable slow down planning
+  <a href="#lateral-acceleration-check" class="md-nav__link">
+    Lateral Acceleration Check
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#debugging" class="md-nav__link">
-    Debugging
-  </a>
-  
-    <nav class="md-nav" aria-label="Debugging">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#obstacle-for-slow-down" class="md-nav__link">
-    Obstacle for slow down
+  <a href="#max-longitudinal-acceleration-check" class="md-nav__link">
+    Max Longitudinal Acceleration Check
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#min-longitudinal-acceleration-check" class="md-nav__link">
+    Min Longitudinal Acceleration Check
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lateral-jerk-check" class="md-nav__link">
+    Lateral Jerk Check
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steering-check" class="md-nav__link">
+    Steering Check
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#steering-rate-check" class="md-nav__link">
+    Steering Rate Check
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distance-deviation-check" class="md-nav__link">
+    Distance Deviation Check
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#longitudinal-distance-deviation-check" class="md-nav__link">
+    Longitudinal Distance Deviation Check
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#velocity-deviation-check" class="md-nav__link">
+    Velocity Deviation Check
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yaw-deviation-check" class="md-nav__link">
+    Yaw Deviation Check
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forward-trajectory-length-check" class="md-nav__link">
+    Forward Trajectory Length Check
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trajectory-shift-check" class="md-nav__link">
+    Trajectory Shift Check
   </a>
   
 </li>
@@ -14030,94 +14080,706 @@
   
 
 
-<div><h1 id="obstacle-slow-down">Obstacle Slow Down<a class="headerlink" href="#obstacle-slow-down" title="Permanent link">#</a></h1>
-<h2 id="role">Role<a class="headerlink" href="#role" title="Permanent link">#</a></h2>
-<p>The <code>obstacle_slow_down</code> module does the slow down planning when there is a static/dynamic obstacle near the trajectory.</p>
-<h2 id="activation">Activation<a class="headerlink" href="#activation" title="Permanent link">#</a></h2>
-<p>This module is activated if the launch parameter <code>launch_obstacle_slow_down_module</code> is set to true.</p>
-<h2 id="inner-workings-algorithms">Inner-workings / Algorithms<a class="headerlink" href="#inner-workings-algorithms" title="Permanent link">#</a></h2>
-<h3 id="obstacle-filtering">Obstacle Filtering<a class="headerlink" href="#obstacle-filtering" title="Permanent link">#</a></h3>
-<p>Obstacles meeting the following condition are determined as obstacles for slowing down.</p>
+<div><h1 id="trajectory-checker">Trajectory Checker<a class="headerlink" href="#trajectory-checker" title="Permanent link">#</a></h1>
+<p>The <code>intersection_collision_checker</code> is a plugin module of <code>autoware_planning_validator</code> node. It is responsible for validating the planning trajectory before it is published.</p>
+<h2 id="supported-features">Supported features<a class="headerlink" href="#supported-features" title="Permanent link">#</a></h2>
+<p>The following features are supported for trajectory validation and can have thresholds set by parameters:</p>
 <ul>
-<li>The object type is for slowing down according to <code>obstacle_filtering.object_type.*</code>.</li>
-<li>The lateral distance from the object to the ego's trajectory is smaller than <code>obstacle_filtering.max_lat_margin</code> and larger than <code>obstacle_filtering.min_lat_margin</code>.<ul>
-<li>For the stable decision making, <code>obstacle_filtering.lat_hysteresis_margin</code> is applied for the hysteresis of the lateral margin.</li>
+<li><strong>Invalid field</strong> : e.g. Inf, Nan</li>
+<li><strong>Trajectory points interval</strong> : invalid if any of the distance of trajectory points is too large</li>
+<li><strong>Curvature</strong> : invalid if the trajectory has too sharp turns that is not feasible for the given vehicle kinematics</li>
+<li><strong>Relative angle</strong> : invalid if the yaw angle changes too fast in the sequence of trajectory points</li>
+<li>
+<p><strong>Lateral acceleration</strong> : invalid if the expected lateral acceleration/deceleration is too large. Lateral acceleration is calculated using the formula:</p>
+<div class="arithmatex">\[
+a_{lat} = v_{lon}^2 * \kappa
+\]</div>
+<p>Where <span class="arithmatex">\(v_{lon}\)</span> is longitudinal velocity and <span class="arithmatex">\(\kappa\)</span> is curvature. Since the acceleration embedded in path points is perpendicular to the derived lateral acceleration, projections are not considered. The velocity and acceleration assigned to each point are directed toward the next path point.</p>
+</li>
+</ul>
+<ul>
+<li>
+<p><strong>Lateral jerk</strong> : invalid if the rate of change of lateral acceleration is too large. Lateral jerk is calculated using the formula:</p>
+<div class="arithmatex">\[
+j_{lat} = v_{lon}^3 * \frac{d\kappa}{ds} + 3 * v_{lon}^2 * a_{lon} * \kappa
+\]</div>
+<p>Where <span class="arithmatex">\(v_{lon}\)</span> is longitudinal velocity, <span class="arithmatex">\(\kappa\)</span> is curvature, <span class="arithmatex">\(a_{lon}\)</span> is longitudinal acceleration, and <span class="arithmatex">\(\frac{d\kappa}{ds}\)</span> is the rate of curvature change with respect to distance. In this implementation, the curvature change (<span class="arithmatex">\(\frac{d\kappa}{ds}\)</span>) is not considered, simplifying the calculation to only the second term. The lateral jerk represents how quickly the lateral acceleration changes, which affects ride comfort and vehicle stability.</p>
+</li>
+</ul>
+<ul>
+<li><strong>Longitudinal acceleration/deceleration</strong> : invalid if the acceleration/deceleration in the trajectory point is too large</li>
+<li><strong>Steering angle</strong> : invalid if the expected steering value is too large estimated from trajectory curvature</li>
+<li><strong>Steering angle rate</strong> : invalid if the expected steering rate value is too large</li>
+<li><strong>Velocity deviation</strong> : invalid if the planning velocity is too far from the ego velocity</li>
+<li><strong>Distance deviation</strong> : invalid if the ego is too far from the trajectory</li>
+<li><strong>Longitudinal distance deviation</strong> : invalid if the trajectory is too far from ego in longitudinal direction</li>
+<li><strong>Forward trajectory length</strong> : invalid if the trajectory length is not enough to stop within a given deceleration</li>
+<li><strong>Yaw deviation</strong> : invalid if the difference between the ego yaw and closest trajectory yaw is too large.<ul>
+<li>in general planning is not responsible for keeping a low yaw deviation, so this metric is checked only when the closest trajectory yaw changes by more than <code>th_trajectory_yaw_shift</code> between successive trajectories.</li>
 </ul>
 </li>
-<li>The obstacle which meets the condition <code>obstacle_filtering.successive_num_to_entry_slow_down_condition</code> times in a row will be a target obstacle</li>
-<li>The obstacle which was previously the target obstacle but does not meet the condition <code>obstacle_filtering.successive_num_to_entry_slow_down_condition</code> times in a row will not be a target obstacle.</li>
+<li><strong>Trajectory Shift</strong> : invalid if the lat./long. distance between two consecutive trajectories near the Ego exceed the thresholds.</li>
 </ul>
-<h3 id="slow-down-planning">Slow Down Planning<a class="headerlink" href="#slow-down-planning" title="Permanent link">#</a></h3>
-<p>The role of the slow down planning is inserting slow down velocity in the trajectory where the trajectory points are close to the obstacles. The parameters can be customized depending on the obstacle type, making it possible to adjust the slow down behavior depending if the obstacle is a pedestrian, bicycle, car, etc. Each obstacle type has a <code>static</code> and a <code>moving</code> parameter set, so it is possible to customize the slow down response of the ego vehicle according to the obstacle type and if it is moving or not. If an obstacle is determined to be moving, the corresponding <code>moving</code> set of parameters will be used to compute the vehicle slow down, otherwise, the <code>static</code> parameters will be used. The <code>static</code> and <code>moving</code> separation is useful for customizing the ego vehicle slow down behavior to, for example, slow down more significantly when passing stopped vehicles that might cause occlusion or that might suddenly open its doors.</p>
-<p>An obstacle is classified as <code>static</code> if its total speed is less than the <code>moving_object_speed_threshold</code> parameter. Furthermore, a hysteresis based approach is used to avoid chattering, it uses the <code>moving_object_hysteresis_range</code> parameter range and the obstacle's previous state (<code>moving</code> or <code>static</code>) to determine if the obstacle is moving or not. In other words, if an obstacle was previously classified as <code>static</code>, it will not change its classification to <code>moving</code> unless its total speed is greater than <code>moving_object_speed_threshold</code> + <code>moving_object_hysteresis_range</code>. Likewise, an obstacle previously classified as <code>moving</code>, will only change to <code>static</code> if its speed is lower than <code>moving_object_speed_threshold</code> - <code>moving_object_hysteresis_range</code>.</p>
-<p>The closest point on the obstacle to the ego's trajectory is calculated.
-Then, the slow down velocity is calculated by linear interpolation with the distance between the point and trajectory as follows.</p>
-<p><img alt="slow_down_velocity_calculation" src="docs/slow_down_velocity_calculation.svg"></p>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">#</a></h2>
+<p>The following parameters are used to configure the different validation checks performed by <code>trajectory_checker</code>:</p>
+<h3 id="interval-check">Interval Check<a class="headerlink" href="#interval-check" title="Permanent link">#</a></h3>
 <table>
 <thead>
 <tr>
-<th>Variable</th>
-<th>Description</th>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>v_{out}</code></td>
-<td>calculated velocity for slow down</td>
+<td align="left"><code>interval.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable interval validation check</td>
+<td align="left">true</td>
 </tr>
 <tr>
-<td><code>v_{min}</code></td>
-<td><code>min_ego_velocity</code></td>
+<td align="left"><code>interval.threshold</code></td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">max valid distance between two consecutive trajectory points</td>
+<td align="left">100.0</td>
 </tr>
 <tr>
-<td><code>v_{max}</code></td>
-<td><code>max_ego_velocity</code></td>
+<td align="left"><code>interval.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid interval (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
 </tr>
 <tr>
-<td><code>l_{min}</code></td>
-<td><code>min_lat_margin</code></td>
-</tr>
-<tr>
-<td><code>l_{max}</code></td>
-<td><code>max_lat_margin</code></td>
-</tr>
-<tr>
-<td><code>l'_{max}</code></td>
-<td><code>obstacle_filtering.max_lat_margin</code></td>
+<td align="left"><code>interval.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
 </tr>
 </tbody>
 </table>
-<p>The parameters <code>min/max_ego_velocity</code> and <code>min/max_lat_margin</code> can be adjusted based on the obstacle type,
-its side relative to the ego trajectory, and whether it is moving or not.
-Default values must be provided at launch (<code>object_type_specified_params.default...</code>),
-but each parameter can be overridden for specific cases (obstacle type, left or right, moving or not).
-For example, the <code>min_ego_velocity</code> can be modified for moving cars on the left by setting a different value with parameter <code>object_type_specified_params.default.left.moving.min_ego_velocity</code>.</p>
-<p>The calculated velocity is inserted in the trajectory where the obstacle is inside the area with <code>obstacle_filtering.max_lat_margin</code>.
-More precisely, the velocity is inserted <code>&lt;slow down velocity&gt;</code> * <code>slow_down_planning.time_margin_on_target_velocity</code> meters behind the obstacle.</p>
-<p><img alt="slow_down_planning" src="docs/slow_down_planning.drawio.svg"></p>
-<h3 id="sudden-deceleration-suppression">Sudden deceleration suppression<a class="headerlink" href="#sudden-deceleration-suppression" title="Permanent link">#</a></h3>
-<p>When the slow down point is inserted, the deceleration and jerk is supposed to be higher than <code>slow_down_planning.slow_down_min_acc</code> and <code>slow_down_planning.slow_down_min_jerk</code> respectively. If the slow down point does not follow this condition, the velocity will be increased and the slow down point does not change.</p>
-<h3 id="stable-slow-down-planning">Stable slow down planning<a class="headerlink" href="#stable-slow-down-planning" title="Permanent link">#</a></h3>
-<p>The following low-pass filters will be applied.</p>
-<ul>
-<li><code>slow_down_planning.lpf_gain_slow_down_vel</code><ul>
-<li>slow down velocity</li>
-</ul>
-</li>
-<li><code>slow_down_planning.lpf_gain_lat_dist</code><ul>
-<li>lateral distance of obstacles to the ego's trajectory to calculate the target velocity</li>
-</ul>
-</li>
-<li><code>slow_down_planning.lpf_gain_dist_to_slow_down</code><ul>
-<li>distance to the slow down point</li>
-</ul>
-</li>
-</ul>
-<h2 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Permanent link">#</a></h2>
-<h3 id="obstacle-for-slow-down">Obstacle for slow down<a class="headerlink" href="#obstacle-for-slow-down" title="Permanent link">#</a></h3>
-<p>Yellow sphere which is an obstacle for slow_down is visualized by <code>obstacles_to_slow_down</code> in the <code>~/debug/marker</code> topic.</p>
-<p>Yellow wall which means a safe distance to slow_down if the ego's front meets the wall is visualized in the <code>~/debug/slow_down/virtual_wall</code> topic.</p>
-<p><img alt="slow_down_visualization" src="docs/slow_down_visualization.png"></p></div>
+<h3 id="curvature-check">Curvature Check<a class="headerlink" href="#curvature-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>curvature.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable curvature validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>curvature.threshold</code></td>
+<td align="left">[1/m]</td>
+<td align="left">double</td>
+<td align="left">max valid value for the trajectory curvature</td>
+<td align="left">2.0</td>
+</tr>
+<tr>
+<td align="left"><code>curvature.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid curvature (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
+</tr>
+<tr>
+<td align="left"><code>curvature.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="relative-angle-check">Relative Angle Check<a class="headerlink" href="#relative-angle-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>relative_angle.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable relative angle validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>relative_angle.threshold</code></td>
+<td align="left">[rad]</td>
+<td align="left">double</td>
+<td align="left">max valid angle difference between two consecutive trajectory points</td>
+<td align="left">2.0</td>
+</tr>
+<tr>
+<td align="left"><code>relative_angle.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid relative_angle (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
+</tr>
+<tr>
+<td align="left"><code>relative_angle.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lateral-acceleration-check">Lateral Acceleration Check<a class="headerlink" href="#lateral-acceleration-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>acceleration.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable lateral acceleration validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>acceleration.threshold</code></td>
+<td align="left">[m/ss]</td>
+<td align="left">double</td>
+<td align="left">max valid value for the lateral acceleration along the trajectory</td>
+<td align="left">9.8</td>
+</tr>
+<tr>
+<td align="left"><code>acceleration.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid acceleration (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
+</tr>
+<tr>
+<td align="left"><code>acceleration.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="max-longitudinal-acceleration-check">Max Longitudinal Acceleration Check<a class="headerlink" href="#max-longitudinal-acceleration-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>acceleration.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable max longitudinal acceleration validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>acceleration.threshold</code></td>
+<td align="left">[m/ss]</td>
+<td align="left">double</td>
+<td align="left">max valid value for the longitudinal acceleration along the trajectory</td>
+<td align="left">9.8</td>
+</tr>
+<tr>
+<td align="left"><code>acceleration.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid acceleration (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
+</tr>
+<tr>
+<td align="left"><code>acceleration.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="min-longitudinal-acceleration-check">Min Longitudinal Acceleration Check<a class="headerlink" href="#min-longitudinal-acceleration-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>acceleration.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable min longitudinal acceleration validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>acceleration.threshold</code></td>
+<td align="left">[m/ss]</td>
+<td align="left">double</td>
+<td align="left">min valid value for the longitudinal acceleration along the trajectory</td>
+<td align="left">-9.8</td>
+</tr>
+<tr>
+<td align="left"><code>acceleration.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid acceleration (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
+</tr>
+<tr>
+<td align="left"><code>acceleration.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="lateral-jerk-check">Lateral Jerk Check<a class="headerlink" href="#lateral-jerk-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>lateral_jerk.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable lateral jerk validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>lateral_jerk.threshold</code></td>
+<td align="left">[m/sss]</td>
+<td align="left">double</td>
+<td align="left">max valid value for the lateral jerk along the trajectory</td>
+<td align="left">7.0</td>
+</tr>
+<tr>
+<td align="left"><code>lateral_jerk.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid lateral jerk (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
+</tr>
+<tr>
+<td align="left"><code>lateral_jerk.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="steering-check">Steering Check<a class="headerlink" href="#steering-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>steering.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable steering validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>steering.threshold</code></td>
+<td align="left">[rad]</td>
+<td align="left">double</td>
+<td align="left">max valid steering value along the trajectory</td>
+<td align="left">1.414</td>
+</tr>
+<tr>
+<td align="left"><code>steering.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid steering (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
+</tr>
+<tr>
+<td align="left"><code>steering.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="steering-rate-check">Steering Rate Check<a class="headerlink" href="#steering-rate-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>steering_rate.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable steering rate validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>steering_rate.threshold</code></td>
+<td align="left">[rad/s]</td>
+<td align="left">double</td>
+<td align="left">max valid steering rate along the trajectory</td>
+<td align="left">10.0</td>
+</tr>
+<tr>
+<td align="left"><code>steering_rate.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid steering rate (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
+</tr>
+<tr>
+<td align="left"><code>steering_rate.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="distance-deviation-check">Distance Deviation Check<a class="headerlink" href="#distance-deviation-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>distance_deviation.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable distance deviation validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>distance_deviation.threshold</code></td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">max valid lateral distance between ego and the nearest trajectory segment</td>
+<td align="left">100.0</td>
+</tr>
+<tr>
+<td align="left"><code>distance_deviation.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid dist deviation (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
+</tr>
+<tr>
+<td align="left"><code>distance_deviation.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="longitudinal-distance-deviation-check">Longitudinal Distance Deviation Check<a class="headerlink" href="#longitudinal-distance-deviation-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>lon_distance_deviation.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable longitudinal distance deviation validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>lon_distance_deviation.threshold</code></td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">max valid longitudinal distance between ego and nearest trajectory point</td>
+<td align="left">2.0</td>
+</tr>
+<tr>
+<td align="left"><code>lon_distance_deviation.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid lon. dist deviation (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
+</tr>
+<tr>
+<td align="left"><code>lon_distance_deviation.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="velocity-deviation-check">Velocity Deviation Check<a class="headerlink" href="#velocity-deviation-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>velocity_deviation.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable velocity deviation validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>velocity_deviation.threshold</code></td>
+<td align="left">[m/s]</td>
+<td align="left">double</td>
+<td align="left">max valid velocity deviation between ego and nearest trajectory point</td>
+<td align="left">100.0</td>
+</tr>
+<tr>
+<td align="left"><code>velocity_deviation.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid velocity deviation (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
+</tr>
+<tr>
+<td align="left"><code>velocity_deviation.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="yaw-deviation-check">Yaw Deviation Check<a class="headerlink" href="#yaw-deviation-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>yaw_deviation.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable yaw deviation validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>yaw_deviation.threshold</code></td>
+<td align="left">[rad]</td>
+<td align="left">double</td>
+<td align="left">max valid yaw deviation between ego and nearest trajectory point</td>
+<td align="left">1.5708</td>
+</tr>
+<tr>
+<td align="left"><code>yaw_deviation.th_trajectory_yaw_shift</code></td>
+<td align="left">[rad]</td>
+<td align="left">double</td>
+<td align="left">minimum change in nearest yaw value between the previous and current trajectory to trigger check</td>
+<td align="left">0.1</td>
+</tr>
+<tr>
+<td align="left"><code>yaw_deviation.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid yaw deviation (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
+</tr>
+<tr>
+<td align="left"><code>yaw_deviation.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="forward-trajectory-length-check">Forward Trajectory Length Check<a class="headerlink" href="#forward-trajectory-length-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>forward_trajectory_length.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable forward length validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>forward_trajectory_length.acceleration</code></td>
+<td align="left">[m/ss]</td>
+<td align="left">double</td>
+<td align="left">acceleration value used to calculate required trajectory length.</td>
+<td align="left">-5.0</td>
+</tr>
+<tr>
+<td align="left"><code>forward_trajectory_length.margin</code></td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">margin of the required length not to raise an error when ego slightly exceeds the end point.</td>
+<td align="left">2.0</td>
+</tr>
+<tr>
+<td align="left"><code>forward_trajectory_length.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid forward length (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">unspecified</td>
+</tr>
+<tr>
+<td align="left"><code>forward_trajectory_length.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">unspecified</td>
+</tr>
+</tbody>
+</table>
+<h3 id="trajectory-shift-check">Trajectory Shift Check<a class="headerlink" href="#trajectory-shift-check" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th align="left">Name</th>
+<th align="left">Unit</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+<th align="left">Default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>trajectory_shift.enable</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">flag to enable/disable trajectory shift validation check</td>
+<td align="left">true</td>
+</tr>
+<tr>
+<td align="left"><code>trajectory_shift.lat_shift_th</code></td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">max valid lateral distance between two consecutive trajectories (measured at nearest points to ego)</td>
+<td align="left">0.5</td>
+</tr>
+<tr>
+<td align="left"><code>trajectory_shift.forward_shift_th</code></td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">max valid Longitudinal distance between two consecutive trajectories (measured at nearest point to ego)</td>
+<td align="left">1.0</td>
+</tr>
+<tr>
+<td align="left"><code>trajectory_shift.backward_shift_th</code></td>
+<td align="left">[m]</td>
+<td align="left">double</td>
+<td align="left">min valid longitudinal distance between two consecutive trajectories (measured at nearest point to ego)</td>
+<td align="left">0.1</td>
+</tr>
+<tr>
+<td align="left"><code>trajectory_shift.handling_type</code></td>
+<td align="left">[-]</td>
+<td align="left">int</td>
+<td align="left">specify handling type for invalid trajectory shift (optional parameter, if not specified will use default of planning validator)</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left"><code>trajectory_shift.override_error_diag</code></td>
+<td align="left">[-]</td>
+<td align="left">bool</td>
+<td align="left">if true, will override error diag from other checks (optional parameter, if not specified will assume FALSE)</td>
+<td align="left">true</td>
+</tr>
+</tbody>
+</table></div>
 
 
 
@@ -14144,7 +14806,7 @@ More precisely, the velocity is inserted <code>&lt;slow down velocity&gt;</code>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../autoware_motion_velocity_obstacle_cruise_module/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Obstacle Cruise" rel="prev">
+          <a href="../autoware_planning_validator_intersection_collision_checker/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Intersection Collision Checker" rel="prev">
             <div class="md-footer__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
             </div>
@@ -14153,20 +14815,20 @@ More precisely, the velocity is inserted <code>&lt;slow down velocity&gt;</code>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Obstacle Cruise
+                Intersection Collision Checker
               </div>
             </div>
           </a>
         
         
           
-          <a href="../autoware_motion_velocity_obstacle_velocity_limiter_module/" class="md-footer__link md-footer__link--next" aria-label="Next: Obstacle Velocity Limiter" rel="next">
+          <a href="../../sampling_based_planner/autoware_bezier_sampler/" class="md-footer__link md-footer__link--next" aria-label="Next: Bézier sampler" rel="next">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Obstacle Velocity Limiter
+                Bézier sampler
               </div>
             </div>
             <div class="md-footer__button md-icon">
